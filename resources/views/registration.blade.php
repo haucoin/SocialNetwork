@@ -1,9 +1,9 @@
 @extends('layouts.appmaster')
-@section('title', 'Social Network: Registration Form')
+@section('title', 'Social Network: Registration')
 
 @section('content')
-<div align="center">
-    <h2>Registration Form</h2><br>
+<div align="center" style="padding-top: 25px">
+    <h2>Registration</h2><br>
     @if(isset($returnMessage))
    		{{$returnMessage}}
 	@endif 
@@ -18,8 +18,6 @@
     				<div class="invalid-feedback">Incorrect Information</div>
     			</div>		
     		</td>
-    	</tr>
-    	<tr>
     		<td>
     			<div class="form-group">
     				<label>Last Name: </label>
@@ -36,8 +34,6 @@
     				<div class="invalid-feedback">Incorrect Information</div>
     			</div>		
     		</td>
-    	</tr>
-    	<tr>
     		<td>
     			<div class="form-group">
     				<label>Password: </label>
@@ -47,7 +43,7 @@
     		</td>
     	</tr>
     	<tr>
-    		<td>
+    		<td colspan="2">
     			<div class="form-group">
     				<label>Email: </label>
     				<input type="text" name="email" class="form-control" placeholder="Enter Email" required="required"/>
