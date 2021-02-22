@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Profile;
 use App\Business\UserBusinessService;
+use App\Business\ProfileBusinessService;
 
 session_start();
 
@@ -15,19 +16,23 @@ session_start();
  * @version 2.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
- * @desc - LoginRegistrationController is a controller class that handles the events and page navigation of the login and register modules
+ * @desc - UserController is a controller class that handles the events and page navigation of the login and register modules and other user features
  */
-class LoginRegistrationController extends Controller {
+class UserController extends Controller {
 	
 	// Define service variable to be used as UserBusinessService
-    private $service;
+    private $userService;
+    
+    // Define service variable to be used as ProfileBusinessService
+    private $profileService;
     
     
     /**
      * Default constructor to initialize the Business Service object
      */
     function __construct() {
-        $this->service = new UserBusinessService();
+    	$this->userService = new UserBusinessService();
+    	$this->profileService = new ProfileBusinessService();
     }
     
     
@@ -43,12 +48,11 @@ class LoginRegistrationController extends Controller {
         $username = $request->input('username');
         $password = $request->input('password');
         
-        // Create an empty Profile object as well as a User object with the parameters
-        $userProfile = new Profile("", "", "", "", "", "");
-        $user = new User(0, "", "", $username, $password, "", null, null, $userProfile);
+        // Create a User object with the parameters
+        $user = new User(0, "", "", $username, $password, "", "", null, null);
         
         // Calls the authenticate method within the business service to determine if the user is authenticated 
-        if($this->service->authenticate($user)) {
+        if($this->userService->authenticate($user)) {
             // Set $currentUser variable to user object within the session (set in business service)
             $currentUser = $_SESSION['currentUser'];
             
@@ -56,7 +60,7 @@ class LoginRegistrationController extends Controller {
             if($currentUser->getActive() == 1) {
                 //If the user is not suspended it will send the user to the homepage after setting the session of blade
                 $request->session()->put('currentUser', $currentUser);
-                $data = ['returnMessage' => "Welcome back " . $currentUser->getFirstName()];
+                $data = ['returnMessage' => "Welcome back, " . $currentUser->getFirstName()];
                 return view('homePage')->with($data);
             }
             // The user is currently suspended
@@ -89,20 +93,26 @@ class LoginRegistrationController extends Controller {
         $username =  $request->input('username');
         $password =  $request->input('password');
         $email =  $request->input('email');
+        $phoneNumber =  $request->input('phoneNumber');
         
-        // Create an empty Profile object as well as a User object with the parameters (set to normal and active user)
-        $userProfile = new Profile("", "", "", "", "", "");
-        $user = new User(0, $firstName, $lastName, $username, $password, $email, 1, 1, $userProfile);
+        // Create a User object with the parameters (set to normal and active user)
+        $user = new User(0, $firstName, $lastName, $username, $password, $email, $phoneNumber, 1, 1);
         
         // Calls the create method within the business service to register a new user
-        $result = $this->service->create($user);
+        $result = $this->userService->create($user);
         
         // Verify if the creation was a success
         if($result == 1) {
+        	
         	// Set the session variable to the new user
             $request->session()->put('currentUser', $_SESSION['currentUser']);
+            
+            $profile = new Profile(0, "", "", "", "", $_SESSION['currentUser']->getId());
+            
+            $this->profileService->createProfile($profile);
+            
             // Set $data variable to a returnMessage containing a welcome message, send to the homePage view
-            $data = ['returnMessage' => "Thank you for joining "  . $user->getFirstName()];
+            $data = ['returnMessage' => "Thank you for joining, "  . $user->getFirstName()];
             return view('homePage')->with($data);
         }
         // Failed to register the user, username already exists
@@ -133,17 +143,11 @@ class LoginRegistrationController extends Controller {
     	$username =  $request->input('username');
     	$password =  $request->input('password');
     	$email =  $request->input('email');
-        $bio =  $request->input('bio');
         $phoneNumber =  $request->input('phoneNumber');
-        $streetAddress =  $request->input('streetAddress');
-        $city =  $request->input('city');
-        $state =  $request->input('state');
-        $zipCode =  $request->input('zipCode');
 
         
-        // Get the current user based on session, get the profile
+        // Get the current user based on session
         $currentUser = $request->session()->get('currentUser');
-        $currentUserProfile = $currentUser->getProfile();
         
         // Set the new values to the user object model
         $currentUser->setFirstName($firstName);
@@ -151,25 +155,15 @@ class LoginRegistrationController extends Controller {
         $currentUser->setUsername($username);
         $currentUser->setPassword($password);
         $currentUser->setEmail($email);
-        
-        // Set the new values to the profile object model
-        $currentUserProfile->setBio($bio);
-        $currentUserProfile->setPhoneNumber($phoneNumber);
-        $currentUserProfile->setStreetAddress($streetAddress);
-        $currentUserProfile->setCity($city);
-        $currentUserProfile->setState($state);
-        $currentUserProfile->setZipCode($zipCode);
-        
-        // Set the profile of the user object to the profile object
-        $currentUser->setProfile($currentUserProfile);
+        $currentUser->setPhoneNumber($phoneNumber);
         
         // Call the update method within the bussiness service, set the session
-        $this->service->update($currentUser);
+        $this->userService->update($currentUser);
         $_SESSION['currentUser'] = $currentUser;
         
         // Put the user as the session, return the user's profile page with the updated user model
         $request->session()->put('currentUser', $currentUser);
-        return view('profile');
+        return view('settings');
     }
     
     

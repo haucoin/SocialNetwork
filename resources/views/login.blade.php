@@ -32,9 +32,9 @@
     		
     	<tr>
     		<td colspan= "2" align="center">
-    		<div align="center">
-    		<input type= "submit" value= "Login" class="btn btn-primary">
-    		</div>
+	    		<div align="center">
+	    			<input type= "submit" value= "Login" class="btn btn-info">
+	    		</div>
     		</td>
     	</tr>	
     	</table>

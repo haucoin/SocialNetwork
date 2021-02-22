@@ -28,22 +28,44 @@ Route::get('/home', function () {
     return view('homePage');
 });
 
-// Route to the profile page
-Route::get('/profile', function() {
-	return view('profile');
+// Route to the settings page
+Route::get('/settings', function() {
+	return view('settings');
 });
 
-// Call the authenticateUser method within the LoginRegistrationController using the /loginUser route
-Route::post('/loginUser', 'LoginRegistrationController@authenticateUser');
+// Route to the add education page
+Route::get('/addEducation', function() {
+	return view('addEducation');
+});
 
-// Call the registerUser method within the LoginRegistrationController using the /registerUser route
-Route::post('/registerUser', 'LoginRegistrationController@registerUser');
+// Route to the add job page
+Route::get('/addJob', function() {
+	return view('addJob');
+});
 
-// Call the editUser method within the LoginRegistrationController using the /editUser route
-Route::post('/editUser', 'LoginRegistrationController@editUser');
 
-// Call the logout method within the LoginRegistrationController using the /logout route
-Route::get('/logout', 'LoginRegistrationController@logout');
+// Call the authenticateUser method within the UserController using the /loginUser route
+Route::post('/loginUser', 'UserController@authenticateUser');
+
+// Call the registerUser method within the UserController using the /registerUser route
+Route::post('/registerUser', 'UserController@registerUser');
+
+// Call the editUser method within the UserController using the /editUser route
+Route::post('/editUser', 'UserController@editUser');
+
+// Call the logout method within the UserController using the /logout route
+Route::get('/logout', 'UserController@logout');
+
+
+// Call the viewProfile method within the ProfileController using the /profile route
+Route::get('/profile', 'ProfileController@viewMyProfile')->name('profile');
+
+// Call the editProfilePage method within the ProfileController using the /editProfilePage route
+Route::post('/editProfilePage', 'ProfileController@editProfilePage');
+
+// Call the editProfilePage method within the ProfileController using the /saveProfile route
+Route::post('/saveProfile', 'ProfileController@editProfile');
+
 
 // Call the adminPage method within the AdminController using the /admin route
 Route::get('/admin', 'AdminController@adminPage');
@@ -58,6 +80,19 @@ Route::post('/suspendUser', 'AdminController@suspendUser');
 Route::post('/adminViewUser', 'AdminController@viewUser');
 
 // Call the adminEditUser method within the AdminController using the /adminEditUser route
-Route::post('/adminEditUser', 'AdminController@adminEditUser');
+Route::post('/adminEdit', 'AdminController@adminEdit');
+
+// Call the adminEditUser method within the AdminController using the /adminEditUser route
+Route::post('/adminSaveUser', 'AdminController@adminSaveUser');
+
+
+
+// Call the addUserEducation method within the EducationController using the /addUserEducation route
+Route::post('/addUserEducation', 'EducationController@addUserEducation');
+
+
+
+// Call the addUserJob method within the JobController using the /addUserJob route
+Route::post('/addUserJob', 'JobController@addUserJob');
 
     

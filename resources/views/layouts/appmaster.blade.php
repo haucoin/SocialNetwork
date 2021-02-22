@@ -16,7 +16,7 @@
             body{
             	font-family: 'Varela Round', sans-serif;
 	            font-size: 13px;
-	            color: #566787;
+	            color: #000000;
 	            background: #f5f5f5;
             }
         </style>

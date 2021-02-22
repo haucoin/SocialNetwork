@@ -17,6 +17,13 @@ Class Database  {
     private $password = "root";
     private $dbName = "SocialNetwork";
     
+    // Azure database connection
+//     private $servername = "127.0.0.1";
+//     private $username = "azure";
+//     private $password = "6#vWHD_$";
+//     private $dbName = "socialnetwork";
+//     private $port = 56034; add this at the end
+    
     
     /**
      * Method to get a connection to the database using mysqli

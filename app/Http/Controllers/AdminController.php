@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\business\UserBusinessService; 
-use App\Models\User;
-use App\Models\Profile;
+use App\business\ProfileBusinessService; 
+use App\Business\JobBusinessService;
+use App\Business\EducationBusinessService;
 
 /**
  * @name Social Network
@@ -18,14 +19,21 @@ use App\Models\Profile;
 class AdminController extends Controller {
    
 	// Define service variable to be used as UserBusinessService
-	private $service;
+	private $userService;
+	// Define service variable to be used as ProfileBusinessService
+	private $profileService;
+	private $jobService;
+	private $educationService;
     
 	
 	/**
-	 * Default constructor to initialize the Business Service object
+	 * Default constructor to initialize the Business Service objectz
 	 */
     function __construct() {
-        $this->service = new UserBusinessService();
+        $this->userService = new UserBusinessService();
+        $this->profileService = new ProfileBusinessService();
+        $this->jobService = new JobBusinessService();
+        $this->educationService = new EducationBusinessService();
     }
     
     
@@ -36,7 +44,7 @@ class AdminController extends Controller {
      */
     public function adminPage() {
     	// Set $data variable to a userList containing all users (retrieved by calling method in businesss service)
-        $data = ['userList' => $this->service->viewAll()];
+    	$data = ['userList' => $this->userService->viewAll()];
         
         // Return to the admin view
         return view('admin')->with($data); 
@@ -54,7 +62,7 @@ class AdminController extends Controller {
         $userId = $request->input('userId');
         
         // Call the delete method within the business service to delete the user given the id
-        $this->service->delete($userId);
+        $this->userService->delete($userId);
         
         // Set $data variable to a userList containing all users (retrieved by calling method in businesss service)
         $data = ['userList' => $this->service->viewAll()];
@@ -73,7 +81,7 @@ class AdminController extends Controller {
         $userId = $request->input('userId');
         
         // Get the user object by called the viewById method in the business service
-        $currentUser = $this->service->viewById($userId);
+        $currentUser = $this->userService->viewById($userId);
         
         // Verify if the user is currently active
         if($currentUser->getActive() == 1) {
@@ -85,10 +93,10 @@ class AdminController extends Controller {
         }
         
         // Update the users information by calling the update method within the business service
-        $this->service->update($currentUser);
+        $this->userService->update($currentUser);
         
         // Set $data variable to a userList containing all users (retrieved by calling method in businesss service)
-        $data = ['userList' => $this->service->viewAll()];
+        $data = ['userList' => $this->userService->viewAll()];
         return view('admin')->with($data); 
     }
     
@@ -103,9 +111,33 @@ class AdminController extends Controller {
         // Get the users id that is being requested to view
         $userId = $request->input('userId');
         
+        $user = $this->userService->viewById($userId);
+        $userProfile = $this->profileService->viewUserProfile($userId);
+        // Call viewAllUserJobs method in JobBusinessService and set to variable
+        $jobHistory = $this->jobService->viewAllUserJobs($userId);
+        // Call viewAllUserEducation method in EducationBusinessService and set to variable
+        $educationHistory = $this->educationService->viewAllUserEducation($userId);
+        
         // Set $data variable to a currentUser containing the user's information (retrieved by calling method in businesss service)
-        $data = ['currentUser' => $this->service->viewById($userId)];
-        return view('adminUserView')->with($data); 
+        $data = ['currentUser' => $user, 'userProfile' => $userProfile, 'jobHistory' => $jobHistory, 'educationHistory' => $educationHistory];
+        return view('adminProfile')->with($data); 
+    }
+    
+    
+    public function adminEdit(Request $request) {
+    	// Get the variables within $request passed in through the form
+    	$userId =  $request->input('userId');
+    	
+    	$user = $this->userService->viewById($userId);
+    	$userProfile = $this->profileService->viewUserProfile($userId);
+    	// Call viewAllUserJobs method in JobBusinessService and set to variable
+    	$jobHistory = $this->jobService->viewAllUserJobs($userId);
+    	// Call viewAllUserEducation method in EducationBusinessService and set to variable
+    	$educationHistory = $this->educationService->viewAllUserEducation($userId);
+    	
+    	// Set $data variable to a the profile variables and return to the profile view
+    	$data = ['currentUser' => $user, 'userProfile' => $userProfile, 'jobHistory' => $jobHistory, 'educationHistory' => $educationHistory];
+    	return view('adminEditProfile')->with($data);
     }
     
     
@@ -115,32 +147,20 @@ class AdminController extends Controller {
      * @param $request - Request: The request object sent from the form submission
      * @return 'adminUserView' - View: The admin's view of a user's profile page
      */
-    public function adminEditUser(Request $request) {
+    public function adminSaveUser(Request $request) {
     	// Get the variables within $request passed in through the form
     	$userId = $request->input('userId');
-    	$firstName =  $request->input('firstName');
-    	$lastName =  $request->input('lastName');
-    	$username =  $request->input('username');
-    	$password =  $request->input('password');
-    	$email =  $request->input('email');
     	$role =  $request->input('role');
     	$active =  $request->input('active');
-    	$bio =  $request->input('bio');
-    	$phoneNumber = $request->input('phoneNumber');
-    	$streetAddress = $request->input('streetAddress');
-    	$city =  $request->input('city');
-    	$state =  $request->input('state');
-    	$zipCode =  $request->input('zipCode');
     	
-    	// Create a Profile object as well as a User object with the parameters
-    	$userProfile = new Profile($bio, $phoneNumber, $streetAddress, $city, $state, $zipCode);
-    	$user = new User($userId, $firstName, $lastName, $username, $password, $email, $role, $active, $userProfile);
+    	$user = $this->userService->viewById($userId);
+    	
+    	$user->setRole($role);
+    	$user->setActive($active);
     	
     	// Call the update method within the business service function in order to update the user
-    	$this->service->update($user);
+    	$this->userService->update($user);
     	
-    	// Set $data variable to a currentUser containing the user's information (retrieved by calling method in businesss service)
-    	$data = ['currentUser' => $this->service->viewById($userId)];
-    	return view('adminUserView')->with($data); 
+    	return $this->adminPage();
     }
 }

@@ -1,13 +1,56 @@
 @extends('layouts.appmaster') @section('title', 'Social Network:
-Profile') @section('content')
+Profile - Admin View') @section('content')
 <div style="font-size: 13px; background: #fff; padding: 20px 25px; margin: 30px 0; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, .05); width: 70%">
 	<div style="padding-bottom: 30px; background: #14A3B8; color: #fff; padding: 16px 30px; margin: -20px -25px 10px; border-radius: 3px 3px 0 0;">
-		<h2>Profile</h2>
+		<h2>Profile - Admin View</h2>
 	</div>
-	<form method="POST" action="editProfilePage">
+	<form method="POST" action="adminEdit">
 		<input type="hidden" name="_token" value="<?php echo csrf_token()?>" />
-		<input type="hidden" name="userId" name="userId" value="{{$userProfile->getUserId()}}">
+		<input type="hidden" name="userId" name="userId" value="{{$currentUser->getId()}}">
 		<table style="width: 100%;">
+			<tr>
+				<td colspan="2">
+					<h5>Profile Information</h5>
+				</td>
+				<td align="right" width="5px">
+					@if(session()->get('currentUser')->getRole() == 0)
+						<button type="submit" style="font-size: 10px; border: 0; background-color: transparent">
+                    		<i class="material-icons">edit</i>
+                    	</button>
+                	@endif
+				</td>
+			</tr>
+			
+			
+			<tr>
+				<td>
+					<div class="form-group">
+						<label class="col-md-12 control-label" for="role">User Role</label>
+						<div class="col-md-12">
+							@if($currentUser->getRole() == 1)
+								<p id="role" name="role" style="color: grey">User</p>
+							@else
+								<p id="role" name="role" style="color: grey">Admin</p>
+							@endif
+						</div>
+					</div>
+				</td>
+				<td>
+					<div class="form-group">
+						<label class="col-md-12 control-label" for="active">Status</label>
+						<div class="col-md-12">
+							@if($currentUser->getActive() == 1)
+								<p id="active" name="active" style="color: grey">Active</p>
+							@else
+								<p id="active" name="active" style="color: grey">Inactive</p>
+							@endif
+						</div>
+					</div>
+				</td>
+			</tr>
+			
+			
+			
 			<tr>
 				<td width="50%">
 					<h5>User Information</h5>
@@ -15,25 +58,18 @@ Profile') @section('content')
 				<td width="50%">
 					<h5>Contact Information</h5>
 				</td>
-				<td align="right" width="5px">
-					@if(session()->get('currentUser')->getId() == $userProfile->getUserId())
-						<button type="submit" style="font-size: 10px; border: 0; background-color: transparent">
-                    		<i class="material-icons">edit</i>
-                    	</button>
-                	@endif
-				</td>
 			</tr>
 			<tr>
 				<td>
 					<!-- Name -->
 					<div class="col-md-6">
-						<p id="name" name="name" style="color: grey">{{session()->get('currentUser')->getFirstName()}} {{session()->get('currentUser')->getLastName()}}</p>
+						<p id="name" name="name" style="color: grey">{{$currentUser->getFirstName()}} {{$currentUser->getLastName()}}</p>
 					</div>
 				</td>
 				<td>
 					<!-- Phone Number -->
 					<div class="col-md-6">
-						<p id="phoneNumber" name="phoneNumber" style="color: grey">{{session()->get('currentUser')->getPhoneNumber()}}</p>
+						<p id="phoneNumber" name="phoneNumber" style="color: grey">{{$currentUser->getPhoneNumber()}}</p>
 					</div>
 				</td>
 			</tr>
@@ -51,7 +87,7 @@ Profile') @section('content')
 				<td>
 					<!-- Email Address -->
 					<div class="col-md-6">
-						<p id="email" name="email" style="color: grey">{{session()->get('currentUser')->getEmail()}}</p>
+						<p id="email" name="email" style="color: grey">{{$currentUser->getEmail()}}</p>
 					</div>
 				</td>
 			</tr>
@@ -100,15 +136,6 @@ Profile') @section('content')
 							<h5>Education History</h5>
 							<br/>
 						</td>
-						<td align="right" width="5px">
-							@if(session()->get('currentUser')->getId() == $userProfile->getUserId())
-								<form method="GET" action="addEducation">
-									<button type="submit" style="font-size: 10px; border: 0; background-color: transparent">
-			                    		<i class="material-icons">add_box</i>
-			                    	</button>
-			                    </form>
-	                		@endif
-						</td>
 					</tr>
 					@if($educationHistory == null)
 						<tr>
@@ -144,15 +171,6 @@ Profile') @section('content')
 						<td style="padding-left: 10px;">
 							<h5>Job History</h5>
 							<br/>
-						</td>
-						<td align="right" width="5px">
-							@if(session()->get('currentUser')->getId() == $userProfile->getUserId())
-								<form method="GET" action="addJob">
-									<button type="submit" style="font-size: 10px; border: 0; background-color: transparent">
-			                    		<i class="material-icons">add_box</i>
-			                    	</button>
-			                    </form>
-		                	@endif
 						</td>
 					</tr>
 					<tr>

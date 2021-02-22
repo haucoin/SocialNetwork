@@ -43,17 +43,24 @@
     		</td>
     	</tr>
     	<tr>
-    		<td colspan="2">
+    		<td>
     			<div class="form-group">
     				<label>Email: </label>
-    				<input type="text" name="email" class="form-control" placeholder="Enter Email" required="required"/>
+    				<input type="email" name="email" class="form-control" placeholder="Enter Email" required="required"/>
+    				<div class="invalid-feedback">Incorrect Information</div>
+    			</div>			
+    		</td>
+    		<td>
+    			<div class="form-group">
+    				<label>Phone Number: </label>
+    				<input type="text" name="phoneNumber" class="form-control" placeholder="Enter Phone Number" required="required"/>
     				<div class="invalid-feedback">Incorrect Information</div>
     			</div>			
     		</td>
     	</tr>
     	<tr>
     		<td colspan= "2" align="center">
-    		<input type= "submit" value= "Register" class="btn btn-primary">
+    		<input type= "submit" value= "Register" class="btn btn-info">
     		</td>
     	</tr>
     		

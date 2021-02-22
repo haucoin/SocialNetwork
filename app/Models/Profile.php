@@ -12,31 +12,31 @@ namespace App\Models;
 Class Profile {
 	
 	// Define the properties of a profile
+	private $id;
     private $bio;
-    private $phoneNumber;
-    private $streetAddress;
     private $city;
     private $state;
-    private $zipCode;
+    private $skills;
+    private $userId;
     
-    
-    /**
+
+	/**
      * Non-default constructor to intialize an object
      * 
+     * @param $id - Integer: The ID number of a profile
      * @param $bio - String: The biography of a user to be shown on their profile page
-     * @param $phoneNumber - String: The phone number of a user
-     * @param $streetAddress - String: The street address where a user resides
      * @param $city - String: The name of the city where a user resides
      * @param $state - String: The name of the state where a user resides
-     * @param $zipCode - String: The zip code where a user resides
+     * @param $skills - String: A list of skills a user has
+     * @param $userId - Integer: The ID of the user that the profile is associated with
      */
-    function __construct($bio, $phoneNumber, $streetAddress, $city, $state, $zipCode) {
+    function __construct($id, $bio, $city, $state, $skills, $userId) {
+    	$this->id = $id;
         $this->bio = $bio;
-        $this->phoneNumber = $phoneNumber;
-        $this->streetAddress = $streetAddress;
         $this->city = $city;
         $this->state = $state;
-        $this->zipCode = $zipCode;
+        $this->skills = $skills;
+        $this->userId = $userId;
     }
     
     
@@ -46,28 +46,20 @@ Class Profile {
      * @param - variables
      * @return - variables
      */
+    public function getId() {
+    	return $this->id;
+    }
+    
+    public function setId($id) {
+    	$this->id = $id;
+    }
+    
 	public function getBio() {
 		return $this->bio;
 	}
 
 	public function setBio($bio) {
 		$this->bio = $bio;
-	}
-
-	public function getPhoneNumber() {
-		return $this->phoneNumber;
-	}
-
-	public function setPhoneNumber($phoneNumber) {
-		$this->phoneNumber = $phoneNumber;
-	}
-
-	public function getStreetAddress() {
-		return $this->streetAddress;
-	}
-
-	public function setStreetAddress($streetAddress) {
-		$this->streetAddress = $streetAddress;
 	}
 
 	public function getCity() {
@@ -85,15 +77,22 @@ Class Profile {
 	public function setState($state) {
 		$this->state = $state;
 	}
-
-	public function getZipCode() {
-		return $this->zipCode;
+	
+	public function getSkills() {
+		return $this->skills;
+	}
+	
+	public function setSkills($skills) {
+		$this->skills = $skills;
 	}
 
-	public function setZipCode($zipCode) {
-		$this->zipCode = $zipCode;
+	public function getUserId() {
+		return $this->userId;
 	}
-
+	
+	public function setUserId($userId) {
+		$this->userId = $userId;
+	}
     
    
 }

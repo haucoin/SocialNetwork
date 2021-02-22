@@ -18,9 +18,9 @@ Class User {
     private $username;
     private $password;
     private $email;
+    private $phoneNumber;
     private $role;
     private $active;
-    private $profile;
     
     
     /**
@@ -32,20 +32,20 @@ Class User {
      * @param $username - String: The username of a user, used for authentication
      * @param $password - String: The password of a user, used for authentication
      * @param $email - String: The email address of a user
+     * @param $phoneNumber - String: The phone number of a user
      * @param $role - String: The role (regular user or admin) of a user
      * @param $active - String: The email address of a user
-     * @param $profile - Profile: An object containing the user's profile information
      */
-    function __construct($id, $firstName, $lastName, $username, $password, $email, $role, $active, Profile $profile) {
+    function __construct($id, $firstName, $lastName, $username, $password, $email, $phoneNumber, $role, $active) {
     	$this->id = $id;
     	$this->firstName = $firstName;
     	$this->lastName = $lastName;
     	$this->username = $username;
     	$this->password = $password;
     	$this->email = $email;
+    	$this->phoneNumber = $phoneNumber;
     	$this->role = $role;
     	$this->active = $active;
-    	$this->profile = $profile;
     }
     
     
@@ -102,6 +102,14 @@ Class User {
 	public function setEmail($email) {
 		$this->email = $email;
 	}
+	
+	public function getPhoneNumber() {
+		return $this->phoneNumber;
+	}
+	
+	public function setPhoneNumber($phoneNumber) {
+		$this->phoneNumber = $phoneNumber;
+	}
 
 	public function getRole() {
 		return $this->role;
@@ -117,14 +125,6 @@ Class User {
 
 	public function setActive($active) {
 		$this->active = $active;
-	}
-
-	public function getProfile() {
-		return $this->profile;
-	}
-
-	public function setProfile($profile) {
-		$this->profile = $profile;
 	}
     
 }

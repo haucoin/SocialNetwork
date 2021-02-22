@@ -15,14 +15,14 @@
         	<tr>
         		<td align="center">
         			<form method= "GET" action= "login">
-        				<input type= "submit" value= "Login" class="btn btn-primary">
+        				<input type= "submit" value= "Login" class="btn btn-info">
         			</form>
         		</td>
         	</tr>
         	<tr>
         		<td align="center">
         			<form method= "GET" action= "registration">
-        				<input type= "submit" value= "Registration" class="btn btn-primary">
+        				<input type= "submit" value= "Registration" class="btn btn-info">
         			</form>
         		</td>
         	</tr>

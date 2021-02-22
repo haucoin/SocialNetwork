@@ -2,18 +2,14 @@
 @section('title', 'Social Network: Admin')
 
 @section('content')
-<link rel="stylesheet" href="resources/style/adminPage.css">
-<br>
-    <div class="container" style="font-size: 13px">
-        <div class="table-wrapper">
-            <div class="table-title">
-                <div class="row">
-                    <div class="col-sm-5">
-						<h2>User <b>Management</b></h2>
-					</div>
-                </div>
-            </div>
-            <table class="table table-striped table-hover">
+
+<div style="font-size: 13px; background: #fff; padding: 20px 25px; margin: 30px 0; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, .05); width: 70%">
+	<div style="padding-bottom: 30px; background: #14A3B8; color: #fff; padding: 16px 30px; margin: -20px -25px 10px; border-radius: 3px 3px 0 0;">
+		<h2>User Management</h2>
+	</div>
+    <div style="font-size: 13px">
+
+            <table class="table table-striped table-hover" >
                 <thead>
                     <tr style="text-align: center">
                         <th>#</th>
@@ -21,6 +17,7 @@
 						<th>Username</th>
 						<th>Role</th>
                         <th>Status</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,7 +31,7 @@
                         	<a style="cursor: pointer" onclick="document.getElementById('userProfileForm{{$user->getId()}}').submit();">{{$user->getFirstName()}}</a>
                         </form>
                         </td>
-                        <td>{{$user->getUserName()}}</td>
+                        <td>{{$user->getUsername()}}</td>
                         @if($user->getRole() == 0)                        
                         	<td>Admin</td>
                         @else
@@ -50,12 +47,16 @@
     						<form method= "POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to change the active status of this user?')">
     							<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
     							<input type="hidden" name="userId" value="{{$user->getId()}}">
-    							<button formaction="suspendUser" class="pause" title="Pause" data-toggle="tooltip">-</button>
+    							<button formaction="suspendUser" title="Pause" style="font-size: 10px; border: 0; background-color: transparent">
+    							    <i class="material-icons">do_not_disturb</i>
+    							</button>
     						</form>
     						<form method= "POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this user?')">
     							<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
     							<input type="hidden" name="userId" value="{{$user->getId()}}">
-    							<button formaction="deleteUser" class="delete" title="Delete" data-toggle="tooltip">X</button>
+    							<button formaction="deleteUser" title="Delete" style="font-size: 10px; border: 0; background-color: transparent">
+    								<i class="material-icons">remove_circle</i>
+    							</button>
     						</form>
 						@endif
 						</td>
@@ -63,7 +64,7 @@
                   @endforeach 
                 </tbody>
             </table>
-        </div>
-    </div> 
+	</div> 
+</div>
 
 @endsection
