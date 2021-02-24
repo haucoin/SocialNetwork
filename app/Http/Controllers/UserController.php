@@ -13,7 +13,7 @@ session_start();
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 3.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - UserController is a controller class that handles the events and page navigation of the login and register modules and other user features
@@ -21,8 +21,7 @@ session_start();
 class UserController extends Controller {
 	
 	// Define service variable to be used as UserBusinessService
-    private $userService;
-    
+    private $userService;  
     // Define service variable to be used as ProfileBusinessService
     private $profileService;
     
@@ -107,8 +106,8 @@ class UserController extends Controller {
         	// Set the session variable to the new user
             $request->session()->put('currentUser', $_SESSION['currentUser']);
             
+            // Create empty profile for the new user, call method in the profileBusinessService
             $profile = new Profile(0, "", "", "", "", $_SESSION['currentUser']->getId());
-            
             $this->profileService->createProfile($profile);
             
             // Set $data variable to a returnMessage containing a welcome message, send to the homePage view
@@ -131,10 +130,10 @@ class UserController extends Controller {
     
     
     /**
-     * Method to edit a user's information
+     * Method to edit a user's information in the settings page
      * 
      * @param $request - Request: The request object sent from the form submission
-     * @return 'profile' - View: The profile of a user containing their information
+     * @return 'settings' - View: The settings page of a user containing their information
      */
     public function editUser(Request $request) {
     	// Get the variables within $request passed in through the form
@@ -144,7 +143,6 @@ class UserController extends Controller {
     	$password =  $request->input('password');
     	$email =  $request->input('email');
         $phoneNumber =  $request->input('phoneNumber');
-
         
         // Get the current user based on session
         $currentUser = $request->session()->get('currentUser');

@@ -54,6 +54,23 @@ class JobController extends Controller {
     
     
     /**
+     * Method to delete a user (physical delete) from the website
+     *
+     * @param $request - Request: The request object sent from the form submission
+     * @return 'admin' - View: The admin user page that displays all users
+     */
+    public function deleteJob(Request $request) {
+    	// Gets the users id that is being requested to delete
+    	$jobId = $request->input('jobId');
+    	
+    	// Call the delete method within the business service to delete the user given the id
+    	$this->jobService->delete($jobId);
+    	
+    	return redirect()->route('profile');
+    }
+    
+    
+    /**
      * Method to edit a user's information
      *
      * @param $request - Request: The request object sent from the form submission

@@ -6,7 +6,7 @@ use App\Data\UserDataService;
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 3.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - UserBusinessService is a class that performs all business logic on the data being sent and retrieved from the database

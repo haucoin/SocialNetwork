@@ -4,7 +4,7 @@ namespace App\Models;
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 3.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - Profile is a model class used to hold the data and properties of a user's profile through different pages and methods
@@ -27,7 +27,7 @@ Class Profile {
      * @param $bio - String: The biography of a user to be shown on their profile page
      * @param $city - String: The name of the city where a user resides
      * @param $state - String: The name of the state where a user resides
-     * @param $skills - String: A list of skills a user has
+     * @param $skills - String: A list of skills a user has in their profile
      * @param $userId - Integer: The ID of the user that the profile is associated with
      */
     function __construct($id, $bio, $city, $state, $skills, $userId) {

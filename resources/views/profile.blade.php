@@ -128,6 +128,15 @@ Profile') @section('content')
 								<br/>
 								<br/>
 							</td>
+							<td style="vertical-align: top;">
+	    						<form method= "POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this job posting?')">
+    								<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
+    								<input type="hidden" name="educationId" value="{{$education->getId()}}">
+	    							<button formaction="deleteEducation" title="Delete" style="font-size: 10px; border: 0; background-color: transparent">
+	    								<i class="material-icons">clear</i>
+	    							</button>
+	    						</form>
+							</td>
 						</tr>
 						@endforeach
 					@endif
@@ -178,6 +187,15 @@ Profile') @section('content')
 									@endif
 									<br/>
 									<br/>
+								</td>
+								<td style="vertical-align: top;">
+		    						<form method= "POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this job?')">
+		    								<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
+    										<input type="hidden" name="jobId" value="{{$job->getId()}}">
+		    							<button formaction="deleteJob" title="Delete" style="font-size: 10px; border: 0; background-color: transparent">
+		    								<i class="material-icons">clear</i>
+		    							</button>
+		    						</form>
 								</td>
 							</tr>
 							@endforeach

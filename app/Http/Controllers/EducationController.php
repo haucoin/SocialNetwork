@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Http\Request;
 use App\Models\Education;
-use App\Business\ProfileBusinessService;
-use App\Business\JobBusinessService;
 use App\Business\EducationBusinessService;
 
 session_start();
@@ -46,6 +44,23 @@ class EducationController extends Controller {
     	// Call viewAllUserEducation method in EducationBusinessService and set to variable
     	$this->educationService->createEducation($education);
         
+    	return redirect()->route('profile');
+    }
+    
+    
+    /**
+     * Method to delete a user (physical delete) from the website
+     *
+     * @param $request - Request: The request object sent from the form submission
+     * @return 'admin' - View: The admin user page that displays all users
+     */
+    public function deleteEducation(Request $request) {
+    	// Gets the users id that is being requested to delete
+    	$jobId = $request->input('educationId');
+    	
+    	// Call the delete method within the business service to delete the user given the id
+    	$this->educationService->delete($jobId);
+    	
     	return redirect()->route('profile');
     }
     

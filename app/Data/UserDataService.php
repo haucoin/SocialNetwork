@@ -3,7 +3,6 @@
 namespace App\Data;
 
 use App\Models\User;
-use App\Models\Profile;
 use Exception;
 
 /**

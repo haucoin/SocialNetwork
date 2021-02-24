@@ -34,5 +34,9 @@ class JobBusinessService {
 		//Sends a object to to the data service in write to the database
 		return $this->service->create($job);
 	}
+	
+	public function delete($id) {
+		return $this->service->delete($id);
+	}
 }
 

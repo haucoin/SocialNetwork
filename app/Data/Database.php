@@ -4,7 +4,7 @@ namespace App\Data;
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 3.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - Database is a class used to make a connection the the MySQL database within phpMyAdmin
@@ -22,7 +22,7 @@ Class Database  {
 //     private $username = "azure";
 //     private $password = "6#vWHD_$";
 //     private $dbName = "socialnetwork";
-//     private $port = 56034; add this at the end
+//     private $port = 56034; add this at the end of the mysqli_connect
     
     
     /**

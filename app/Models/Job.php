@@ -4,10 +4,10 @@ namespace App\Models;
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 3.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
- * @desc - Job is a model class used to hold the data and properties of a user's job history through different pages and methods
+ * @desc - Job is a model class used to hold the data and properties of a user's job through different pages and methods as their job history
  */
 class Job {
 	

@@ -4,7 +4,7 @@ namespace App\Data;
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 3.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - DataServiceInterface is an interface used to define the structure for all data services

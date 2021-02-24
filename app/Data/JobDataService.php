@@ -35,9 +35,17 @@ Class JobDataService {
     public function create($job) {
     	
     	try {
-    		// SQL insert statement to create the profile within the database for the user of the passed in id
-    		$sqlProfile = "INSERT INTO `JOBS` (`TITLE`, `DESCRIPTION`, `COMPANY`, `LOCATION`, `START_DATE`, `END_DATE`, `USER_ID`)
-	                           VALUES ('{$job->getTitle()}', '{$job->getDescription()}', '{$job->getCompany()}', '{$job->getLocation()}', '{$job->getStartDate()}', '{$job->getEndDate()}', '{$_SESSION['currentUser']->getId()}');";
+    		
+    		if($job->getEndDate() == null) {
+    			// SQL insert statement to create the profile within the database for the user of the passed in id
+    			$sqlProfile = "INSERT INTO `JOBS` (`TITLE`, `DESCRIPTION`, `COMPANY`, `LOCATION`, `START_DATE`, `END_DATE`, `USER_ID`)
+	                           VALUES ('{$job->getTitle()}', '{$job->getDescription()}', '{$job->getCompany()}', '{$job->getLocation()}', '{$job->getStartDate()}', null, '{$_SESSION['currentUser']->getId()}');";
+    		}
+    		else {
+	    		// SQL insert statement to create the profile within the database for the user of the passed in id
+	    		$sqlProfile = "INSERT INTO `JOBS` (`TITLE`, `DESCRIPTION`, `COMPANY`, `LOCATION`, `START_DATE`, `END_DATE`, `USER_ID`)
+		                           VALUES ('{$job->getTitle()}', '{$job->getDescription()}', '{$job->getCompany()}', '{$job->getLocation()}', '{$job->getStartDate()}', '{$job->getEndDate()}', '{$_SESSION['currentUser']->getId()}');";
+	    	}
     		
     		// Run the insert profile SQL statement
     		$result = $this->connection->query($sqlProfile);

@@ -22,27 +22,28 @@
                 </thead>
                 <tbody>
                 @foreach($userList as $user)
-                    <tr style="text-align: center">
+                	<tr style="text-align: center">
                         <td>{{$user->getId()}}</td>
                         <td>
-                        <form method="POST" action="adminViewUser" id="userProfileForm{{$user->getId()}}" style="vertical-align: middle">
+                        <form method="POST" action="adminViewUser" id="editUserProfile{{$user->getId()}}" style="vertical-align: middle">
                         	<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
                         	<input type="hidden" name="userId" value="{{$user->getId()}}">
-                        	<a style="cursor: pointer" onclick="document.getElementById('userProfileForm{{$user->getId()}}').submit();">{{$user->getFirstName()}}</a>
+                        	<a style="cursor: pointer" onclick="document.getElementById('editUserProfile{{$user->getId()}}').submit();">{{$user->getFirstName()}}</a>
                         </form>
                         </td>
                         <td>{{$user->getUsername()}}</td>
-                        @if($user->getRole() == 0)                        
+                        @if($user->getRole() == 0)
                         	<td>Admin</td>
                         @else
                         	<td>User</td>
-                    	@endif
-                    	@if($user->getActive())
-							<td><span class="status text-success">&bull;</span> Active</td>
-						@else
-							<td><span class="status text-danger">&bull;</span> Suspended</td>
-						@endif
-						<td>
+                        @endif
+                        
+                        @if($user->getActive())
+                        	<td><span class="status text-success">&bull;</span> Active</td>
+                        @else
+                        	<td><span class="status text-danger">&bull;</span> Suspended</td>
+                        @endif
+                        <td>
 						@if(session()->get('currentUser')->getId() != $user->getId())
     						<form method= "POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to change the active status of this user?')">
     							<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
@@ -61,8 +62,8 @@
 						@endif
 						</td>
                     </tr>
-                  @endforeach 
-                </tbody>
+                @endforeach
+            	</tbody>
             </table>
 	</div> 
 </div>

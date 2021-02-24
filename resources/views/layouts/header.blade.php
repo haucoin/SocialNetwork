@@ -11,7 +11,10 @@
                     	<a class="nav-link" href="profile">Profile</a>
                     </li>
                     <li class="nav-item active">
-                    	<a class="nav-link" href="admin">Admin</a>
+                    	<a class="nav-link" href="adminUsers">Users</a>
+                    </li>
+                    <li class="nav-item active">
+                    	<a class="nav-link" href="adminPostings">Job Postings</a>
                     </li>
                     <li class="nav-item active">
                     	<a class="nav-link" href="settings">Settings</a>
@@ -32,6 +35,9 @@
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                     <li class="nav-item active">
                     	<a class="nav-link" href="profile">Profile </a>
+                    </li>
+                    <li class="nav-item active">
+                    	<a class="nav-link" href="jobPostings">Job Postings</a>
                     </li>
                     <li class="nav-item active">
                     	<a class="nav-link" href="settings">Settings</a>
