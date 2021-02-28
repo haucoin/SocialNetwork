@@ -11,28 +11,33 @@ session_start();
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
- * @desc - UserController is a controller class that handles the events and page navigation of the login and register modules and other user features
+ * @desc - JobController is a controller class that handles the events and page navigation of job modules
  */
 class JobController extends Controller {
 	
-	// Define service variables to be used as business services
+	// Define service variable to be used as JobBusinessService
     private $jobService;
     
     
     /**
-     * Default constructor to initialize the Business Service objects
+     * Default constructor to initialize the Business Service object
      */
     function __construct() {
     	$this->jobService = new JobBusinessService();
     }
     
     
-
-    public function addUserJob(Request $request) {
-    	
+	/**
+	 * Method to create a job within a users profile
+	 * 
+     * @param $request - Request: The request object sent from the form submission
+	 * @return 'profile' - Route: A redirect to the /profile route
+	 */
+    public function createJob(Request $request) {
+    	// Get the variables within $request passed in through the form
     	$title = $request->input('title');
     	$description = $request->input('description');
     	$company = $request->input('company');
@@ -40,78 +45,37 @@ class JobController extends Controller {
     	$startDate = $request->input('startDate');
     	$endDate = $request->input('endDate');
     	
+    	// Check if there was an end date inserted, if not set to null
     	if($endDate == "") {
     		$endDate = null;
     	}
     	
+    	// Create a Job object using variables
     	$job = new Job(0, $title, $description, $company, $location, $startDate, $endDate, $_SESSION['currentUser']->getId());
     	
-    	// Call viewAllUserEducation method in EducationBusinessService and set to variable
-    	$this->jobService->createJob($job);
+    	// Call create method in JobBusinessService
+    	$this->jobService->create($job);
         
+    	// Redirect to the /profile route
     	return redirect()->route('profile');
     }
     
     
     /**
-     * Method to delete a user (physical delete) from the website
+     * Method to delete a job from a users profile
      *
      * @param $request - Request: The request object sent from the form submission
-     * @return 'admin' - View: The admin user page that displays all users
+	 * @return 'profile' - Route: A redirect to the /profile route
      */
     public function deleteJob(Request $request) {
-    	// Gets the users id that is being requested to delete
+    	// Get the variable within $request passed in through the form
     	$jobId = $request->input('jobId');
     	
-    	// Call the delete method within the business service to delete the user given the id
+    	// Call delete method in JobBusinessService
     	$this->jobService->delete($jobId);
     	
+    	// Redirect to the /profile route
     	return redirect()->route('profile');
-    }
-    
-    
-    /**
-     * Method to edit a user's information
-     *
-     * @param $request - Request: The request object sent from the form submission
-     * @return 'profile' - View: The profile of a user containing their information
-     */
-//     public function editProfilePage(Request $request) {
-//     	// Get the variables within $request passed in through the form
-//     	$userId =  $request->input('userId');
-    	
-//     	// Call the viewByUserId method in the business servicee
-//     	$profile = $this->profileService->viewUserProfile($userId);
-    
-//     	// Set $data variable to a the profile variables and return to the profile view
-//     	$data = ['userProfile' => $profile];
-//     	return view('editProfile')->with($data);
-//     }
-    
-    
-    
-    /**
-     * Method to edit a user's information
-     * 
-     * @param $request - Request: The request object sent from the form submission
-     * @return 'profile' - View: The profile of a user containing their information
-     */
-//     public function editProfile(Request $request) {
-//     	// Get the variables within $request passed in through the form
-//     	$id =  $request->input('profileId');
-//     	$bio =  $request->input('bio');
-//     	$city =  $request->input('city');
-//     	$state =  $request->input('state');
-//     	$skills =  $request->input('skills');
-    	
-//     	// Call the viewByUserId method in the business servicee
-//     	$profile = new Profile($id, $bio, $city, $state, $skills, $_SESSION['currentUser']->getId());
-        
-//         // Call the update method within the bussiness service, set the session
-//     	$this->profileService->updateProfile($profile);
-        
-//     	return $this->viewMyProfile();
-//     }
-    
+    }  
  
 }

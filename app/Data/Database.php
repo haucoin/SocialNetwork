@@ -4,7 +4,7 @@ namespace App\Data;
 
 /**
  * @name Social Network
- * @version 3.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - Database is a class used to make a connection the the MySQL database within phpMyAdmin
@@ -27,6 +27,7 @@ Class Database  {
     
     /**
      * Method to get a connection to the database using mysqli
+     * 
      * @return $connection - Connection: The connection object to the database
      */
     function getConnection() {
@@ -38,6 +39,7 @@ Class Database  {
             die("Connection failed: " . mysqli_connect_error());
         }
         
+        // Return the connection
         return $connection;
     }
 }

@@ -1,10 +1,12 @@
-@extends('layouts.appmaster') @section('title', 'Social Network:
-Edit Profile') @section('content')
+@extends('layouts.appmaster') 
+@section('title', 'Social Network: Edit Profile') 
+@section('content')
+
 <div style="font-size: 13px; background: #fff; padding: 20px 25px; margin: 30px 0; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, .05); width: 70%">
 	<div style="padding-bottom: 30px; background: #14A3B8; color: #fff; padding: 16px 30px; margin: -20px -25px 10px; border-radius: 3px 3px 0 0;">
 		<h2>Edit Profile</h2>
 	</div>
-	<form method="POST" action="saveProfile">
+	<form method="POST" action="updateProfile">
 		<input type="hidden" name="_token" value="<?php echo csrf_token()?>" />
 		<input type="hidden" name="profileId" name="profileId" value="{{$userProfile->getId()}}">
 		<table style="width: 100%;">

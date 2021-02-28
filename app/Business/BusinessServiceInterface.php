@@ -4,7 +4,7 @@ namespace App\Business;
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - BusinessServiceInterface is an interface used to define the structure for all business services
@@ -47,12 +47,5 @@ interface BusinessServiceInterface {
      * @param $id - Integer: The id number of an object within the database
      */
     public function viewById(int $id);
-    
-    
-    /**
-     * Method to verify a user by checking if the provided credentials exist
-     * @param $id - Integer: The id number of an object within the database
-     */
-    public function authenticate($object);
     
 }

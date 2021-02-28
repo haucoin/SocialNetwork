@@ -4,7 +4,7 @@ namespace App\Data;
 
 /**
  * @name Social Network
- * @version 3.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - DataServiceInterface is an interface used to define the structure for all data services
@@ -47,4 +47,6 @@ interface DataServiceInterface {
      * @param $id - Integer: The id number of an object within the database
      */
     public function viewById(int $id);
+    
+    
 }

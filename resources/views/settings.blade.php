@@ -1,12 +1,14 @@
-@extends('layouts.appmaster') @section('title', 'Social Network:
-Settings') @section('content')
+@extends('layouts.appmaster')
+@section('title', 'Social Network: Settings') 
+@section('content')
+
 <div
 	style="font-size: 13px; background: #fff; padding: 20px 25px; margin: 30px 0; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, .05); width: 70%">
 	<div
 		style="padding-bottom: 15px; background: #14A3B8; color: #fff; padding: 16px 30px; margin: -20px -25px 10px; border-radius: 3px 3px 0 0;">
 		<h2>User Settings</h2>
 	</div>
-	<form method="POST" action="editUser">
+	<form method="POST" action="updateUser">
 		<input type="hidden" name="_token" value="<?php echo csrf_token()?>" />
 		<table style="width: 100%;">
 			<tr>

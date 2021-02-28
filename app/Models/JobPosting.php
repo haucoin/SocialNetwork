@@ -3,7 +3,7 @@ namespace App\Models;
 
 /**
  * @name Social Network
- * @version 3.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - JobPosting is a model class used to hold the data and properties of a job posting through different pages and methods

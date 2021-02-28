@@ -4,7 +4,14 @@ namespace App\Business;
 
 use App\Data\ProfileDataService;
 
-class ProfileBusinessService {
+/**
+ * @name Social Network
+ * @version 4.0
+ * @author Holland Aucoin and Salvatore Parascandola
+ *
+ * @desc - ProfileBusinessService is a class that performs all business logic on the user profile data being sent and retrieved from the database
+ */
+class ProfileBusinessService implements BusinessServiceInterface {
 	
 	// Define service variable to be used as ProfileDataService
 	private $service;
@@ -17,32 +24,50 @@ class ProfileBusinessService {
 		$this->service = new ProfileDataService();
 	}
 	
+	
 	/**
 	 * {@inheritDoc}
 	 *
 	 * @see \App\Business\BusinessServiceInterface::create()
 	 */
-	public function createProfile($profile) {
-		//Sends a object to to the data service in write to the database
+	public function create($profile) {
+		// Call the create method in ProfileDataService
 		return $this->service->create($profile);
 	}
 	
-	
-	public function viewUserProfile($userId) {
-		
-		$currentProfile = $this->service->viewByUserId($userId);
-		
-		return $currentProfile;
-	}
 	
 	/**
 	 * {@inheritDoc}
 	 *
 	 * @see \App\Business\BusinessServiceInterface::update()
 	 */
-	public function updateProfile($profile) {
-		//Sends an updated object to the data service
+	public function update($profile) {
+		// Call the update method in ProfileDataService
 		return $this->service->update($profile);
 	}
+	
+	
+	/**
+	 * UNUSED FOR THIS BUSINESS SERVICE
+	 */
+	public function delete(int $id) { }
+	
+	
+	/**
+	 * UNUSED FOR THIS BUSINESS SERVICE
+	 */
+	public function viewAll() { }
+	
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see \App\Business\BusinessServiceInterface::viewById()
+	 */
+	public function viewById($userId) {
+		// Call the viewByUserId method in ProfileDataService
+		return $this->service->viewByUserId($userId);
+	}
+
 }
 

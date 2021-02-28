@@ -1,6 +1,5 @@
 @extends('layouts.appmaster')
-@section('title', 'Social Network: Admin')
-
+@section('title', 'Social Network: Admin Users')
 @section('content')
 
 <div style="font-size: 13px; background: #fff; padding: 20px 25px; margin: 30px 0; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, .05); width: 70%">
@@ -25,7 +24,7 @@
                 	<tr style="text-align: center">
                         <td>{{$user->getId()}}</td>
                         <td>
-                        <form method="POST" action="adminViewUser" id="editUserProfile{{$user->getId()}}" style="vertical-align: middle">
+                        <form method="POST" action="viewUserAccount" id="editUserProfile{{$user->getId()}}" style="vertical-align: middle">
                         	<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
                         	<input type="hidden" name="userId" value="{{$user->getId()}}">
                         	<a style="cursor: pointer" onclick="document.getElementById('editUserProfile{{$user->getId()}}').submit();">{{$user->getFirstName()}}</a>
@@ -48,14 +47,14 @@
     						<form method= "POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to change the active status of this user?')">
     							<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
     							<input type="hidden" name="userId" value="{{$user->getId()}}">
-    							<button formaction="suspendUser" title="Pause" style="font-size: 10px; border: 0; background-color: transparent">
+    							<button formaction="suspendUserAccount" title="Pause" style="font-size: 10px; border: 0; background-color: transparent">
     							    <i class="material-icons">do_not_disturb</i>
     							</button>
     						</form>
     						<form method= "POST" style="display: inline;" onsubmit="return confirm('Are you sure you want to delete this user?')">
     							<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
     							<input type="hidden" name="userId" value="{{$user->getId()}}">
-    							<button formaction="deleteUser" title="Delete" style="font-size: 10px; border: 0; background-color: transparent">
+    							<button formaction="deleteUserAccount" title="Delete" style="font-size: 10px; border: 0; background-color: transparent">
     								<i class="material-icons">remove_circle</i>
     							</button>
     						</form>

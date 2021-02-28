@@ -1,7 +1,7 @@
 @extends('layouts.appmaster')
 @section('title', 'Social Network: Index')
-
 @section('content')
+
 <div align="center" style="padding-top: 25px">
     <h2>Welcome to Social Network,</h2>
     <br/>

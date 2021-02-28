@@ -13,7 +13,7 @@ session_start();
 
 /**
  * @name Social Network
- * @version 3.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - ProfileController is a controller class that handles the events and page navigation of the profile for a user
@@ -43,14 +43,13 @@ class ProfileController extends Controller {
 	 * 
 	 * @return 'profile' - View: The profile of a user containing their information
 	 */
-    public function viewMyProfile() {
-    	
-    	// Call viewUserProfile method in ProfileBusinessService and set to variable
-    	$userProfile = $this->profileService->viewUserProfile($_SESSION['currentUser']->getId());
-    	// Call viewAllUserJobs method in JobBusinessService and set to variable
-    	$jobHistory = $this->jobService->viewAllUserJobs($_SESSION['currentUser']->getId());
-    	// Call viewAllUserEducation method in EducationBusinessService and set to variable
-    	$educationHistory = $this->educationService->viewAllUserEducation($_SESSION['currentUser']->getId());
+    public function viewProfile() {
+    	// Call viewById method in ProfileBusinessService and set to variable
+    	$userProfile = $this->profileService->viewById($_SESSION['currentUser']->getId());
+    	// Call viewAllById method in JobBusinessService and set to variable
+    	$jobHistory = $this->jobService->viewAllById($_SESSION['currentUser']->getId());
+    	// Call viewAllById method in EducationBusinessService and set to variable
+    	$educationHistory = $this->educationService->viewAllById($_SESSION['currentUser']->getId());
         
     	// Set $data variable to a the userProfile, jobHistory, and educationHistory variables and return to the profile view
     	$data = ['userProfile' => $userProfile, 'jobHistory' => $jobHistory, 'educationHistory' => $educationHistory];
@@ -59,19 +58,19 @@ class ProfileController extends Controller {
     
     
     /**
-     * Method to edit a user's information
+     * Method to show the edit page for a profile
      *
      * @param $request - Request: The request object sent from the form submission
      * @return 'profile' - View: The profile of a user containing their information
      */
-    public function editProfilePage(Request $request) {
-    	// Get the variables within $request passed in through the form
+    public function editProfile(Request $request) {
+    	// Get the variable within $request passed in through the form
     	$userId = $request->input('userId');
     	
     	// Call the viewByUserId method in the ProfileBusinessService
-    	$profile = $this->profileService->viewUserProfile($userId);
+    	$profile = $this->profileService->viewById($userId);
     
-    	// Set $data variable to a the profile variables and return to the profile view
+    	// Set $data variable to a the profile variable and return to the profile view
     	$data = ['userProfile' => $profile];
     	return view('editProfile')->with($data);
     }
@@ -84,7 +83,7 @@ class ProfileController extends Controller {
      * @param $request - Request: The request object sent from the form submission
      * @return 'profile' - View: The profile of a user containing their information
      */
-    public function editProfile(Request $request) {
+    public function updateProfile(Request $request) {
     	// Get the variables within $request passed in through the form
     	$id = $request->input('profileId');
     	$bio = $request->input('bio');
@@ -92,12 +91,13 @@ class ProfileController extends Controller {
     	$state = $request->input('state');
     	$skills = $request->input('skills');
     	
-    	// Create a new profile object and call the updateProfile method in the ProfileBusinessService
+    	// Create a new profile object
     	$profile = new Profile($id, $bio, $city, $state, $skills, $_SESSION['currentUser']->getId());
-    	$this->profileService->updateProfile($profile);
+    	// Call the update method in the ProfileBusinessService
+    	$this->profileService->update($profile);
         
-    	// Call the viewMyProfile method above to shown the profile again after being updated
-    	return $this->viewMyProfile();
+    	// Call the viewProfile method above to shown the profile again after being updated
+    	return $this->viewProfile();
     }
     
  

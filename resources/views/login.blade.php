@@ -1,7 +1,7 @@
 @extends('layouts.appmaster')
 @section('title', 'Social Network: Login')
-
 @section('content')
+
 <div align="center" style="padding-top: 25px">
     <h2>Login</h2>
     @if(isset($returnMessage))

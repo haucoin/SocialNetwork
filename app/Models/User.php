@@ -4,7 +4,7 @@ namespace App\Models;
 
 /**
  * @name Social Network
- * @version 3.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  * 
  * @desc - User is a model class used to hold the data and properties of a user object through different pages and methods
@@ -26,7 +26,7 @@ Class User {
     /**
      * Non-default constructor to intialize an object
      * 
-     * @param $id - int: The unique id of a user for identification
+     * @param $id - Integer: The ID number of a user used for identification
      * @param $firstName - String: The first name of a user
      * @param $lastName - String: The last name of a user
      * @param $username - String: The username of a user, used for authentication

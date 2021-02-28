@@ -1,5 +1,7 @@
-@extends('layouts.appmaster') @section('title', 'Social Network:
-Job Posting') @section('content')
+@extends('layouts.appmaster')
+@section('title', 'Social Network: Job Posting') 
+@section('content')
+
 <div style="font-size: 13px; background: #fff; padding: 20px 25px; margin: 30px 0; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, .05); width: 70%">
 	<div style="padding-bottom: 15px; background: #14A3B8; color: #fff; padding: 16px 30px; margin: -20px -25px 10px; border-radius: 3px 3px 0 0;">
 		<h2>Job Posting</h2>
@@ -9,6 +11,17 @@ Job Posting') @section('content')
 				<td>
 					<h5>Job Posting Information</h5>
 				</td>
+				@if(session()->get('currentUser')->getRole() == 0)
+				<td align="right">
+					<form method="POST" action="editPost">
+						<input type="hidden" name="_token" value="<?php echo csrf_token()?>" />
+						<input type="hidden" name="postId" name="postId" value="{{$post->getId()}}">
+						<button type="submit" style="font-size: 10px; border: 0; background-color: transparent">
+	                    	<i class="material-icons">edit</i>
+	                   	</button>
+	                </form>
+				</td>
+				@endif
 			</tr>
 			<tr>
 				<td>
