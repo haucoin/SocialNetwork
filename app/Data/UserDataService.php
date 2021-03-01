@@ -12,7 +12,7 @@ use Exception;
  *
  * @desc - UserDataService is a DAO that is used to access the users table within the database
  */
-Class UserDataService implements DataServiceInterface {
+class UserDataService implements DataServiceInterface {
     
 	// Define connection variable to be used as the database connection
     private $connection;
@@ -81,7 +81,6 @@ Class UserDataService implements DataServiceInterface {
     public function update($user) {
         
     	try {
-	        
 	        // SQL update statement to update the user within the database to the user object passed in
 	        $sqlStatement = "UPDATE `USERS` SET `FIRST_NAME` = '{$user->getFirstName()}', `LAST_NAME` = '{$user->getLastName()}', 
 	                    `USERNAME` = '{$user->getUsername()}', `PASSWORD` = '{$user->getPassword()}', `EMAIL` = '{$user->getEmail()}', `PHONE_NUMBER` = '{$user->getPhoneNumber()}',
@@ -114,19 +113,19 @@ Class UserDataService implements DataServiceInterface {
 	        // SQL delete statements to remove the user and their profile from the database given the id passed in
 	        $sqlUser = "DELETE FROM `USERS` WHERE `ID`= {$userId};";
 	        $sqlProfile = "DELETE FROM `PROFILES` WHERE `USER_ID`= {$userId};";
-	        $sqlEducation = "DELETE FROM `EDUCATION` WHERE `USER_ID`= {$userId};";
 	        $sqlJobs = "DELETE FROM `JOBS` WHERE `USER_ID`= {$userId};";
-	        
-	        // Run the delete user SQL statement of education history and add to affected rows
+	        $sqlEducation = "DELETE FROM `EDUCATION` WHERE `USER_ID`= {$userId};";
+	    
+	        // Run the delete SQL statement of education history and add to affected rows
 	        $this->connection->query($sqlEducation);
 	        $numRowsAffected += $this->connection->affected_rows;
-	        // Run the delete user SQL statement of job history and add to affected rows
+	        // Run the delete SQL statement of job history and add to affected rows
 	        $this->connection->query($sqlJobs);
 	        $numRowsAffected += $this->connection->affected_rows;
-	        // Run the delete user SQL statement of a profile and add to affected rows
+	        // Run the delete SQL statement of a profile and add to affected rows
 	        $this->connection->query($sqlProfile);
 	        $numRowsAffected += $this->connection->affected_rows;
-	        // Run the delete profile SQL statement of a user and add to affected rows
+	        // Run the delete SQL statement of a user and add to affected rows
 	        $this->connection->query($sqlUser);
 	        $numRowsAffected += $this->connection->affected_rows;
 	        
@@ -188,7 +187,6 @@ Class UserDataService implements DataServiceInterface {
     public function viewById(int $userId) {
     	
     	try{
-    		
 	    	// SQL select statement to retrieve the user matching the given id
 	    	$sqlUsers = "SELECT * FROM USERS WHERE ID = {$userId}";
 	    	

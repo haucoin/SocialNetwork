@@ -65,8 +65,8 @@ class ProfileBusinessService implements BusinessServiceInterface {
 	 * @see \App\Business\BusinessServiceInterface::viewById()
 	 */
 	public function viewById($userId) {
-		// Call the viewByUserId method in ProfileDataService
-		return $this->service->viewByUserId($userId);
+		// Call the viewById method in ProfileDataService
+		return $this->service->viewById($userId);
 	}
 
 }

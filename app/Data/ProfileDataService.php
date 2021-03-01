@@ -7,12 +7,12 @@ use Exception;
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
- * @desc - UserDataService is a DAO that is used to access the users table within the database
+ * @desc - ProfileDataService is a DAO that is used to access the profiles table within the database
  */
-Class ProfileDataService {
+class ProfileDataService implements DataServiceInterface {
     
 	// Define connection variable to be used as the database connection
     private $connection;
@@ -42,10 +42,11 @@ Class ProfileDataService {
     		// Run the insert profile SQL statement
     		$result = $this->connection->query($sqlProfile);
     		
+    		// Return the result
     		return $result;
     	} 
+    	// An error occurred, throw exception
     	catch (Exception $e) {
-    		// Throw exception
     		throw new Exception("Exception: " . $e->getMessage(), 0, $e);
     	}
     	
@@ -60,9 +61,6 @@ Class ProfileDataService {
     public function update($profile) {
         
     	try {
-    		
-    		
-	        
 	        // SQL update statements to update the user within the database to the user object passed in
     		$sqlProfile = "UPDATE `PROFILES` SET `BIO` = '{$profile->getBio()}', `CITY` = '{$profile->getCity()}', `STATE` = '{$profile->getState()}', 
                                     `SKILLS` = '{$profile->getSkills()}' WHERE `PROFILES`.`ID` = {$profile->getId()};";
@@ -81,69 +79,49 @@ Class ProfileDataService {
 
     
     /**
-     * {@inheritDoc}
-     * 
-     * @see \App\Data\DataServiceInterface::delete()
+     * UNUSED FOR THIS DATA SERVICE
      */
-    public function delete(int $userId) {
-    	
-    	try {
-	        
-	        // SQL delete statements to remove the user's profile from the database given the id passed in
-    		$sqlProfile = "DELETE FROM `PROFILES` WHERE `USER_ID`= {$userId};";
-	        
-	        // Run the delete user SQL statement and add to affected rows
-    		$result = $this->connection->query($sqlProfile);
-	        
-	        // Return the result
-    		return $result;
-    	}
-    	// An error occurred, throw exception
-        catch(Exception $e) {
-        	throw new Exception("Exception: " . $e->getMessage(), 0, $e);
-        }
-    }
+    public function delete(int $userId) { }
 
-
+    
+    /**
+     * UNUSED FOR THIS DATA SERVICE
+     */
+    public function viewAll() { }
+    
     
     /**
      * {@inheritDoc}
      * 
      * @see \App\Data\DataServiceInterface::viewById()
      */
-    public function viewByUserId(int $userId) {
+    public function viewById(int $userId) {
     	
     	try {
-    		// Select statment for profiles
+    		// SQL select statement to get a posting given the user id, run query
     		$sqlProfile = "SELECT * FROM PROFILES WHERE USER_ID = {$userId}";
-    		
     		$resultsProfiles = mysqli_query($this->connection, $sqlProfile);
     		
+    		// Set results to associative array
     		$rowProfile = $resultsProfiles->fetch_assoc();
     		
+    		// Get the columns from the results and set to variables
     		$id = $rowProfile['ID'];
     		$bio = $rowProfile['BIO'];
     		$city = $rowProfile['CITY'];
     		$state = $rowProfile['STATE'];
     		$skills = $rowProfile['SKILLS'];
     		
+    		// Create a new profile object using the variables
     		$currentProfile = new Profile($id, $bio, $city, $state, $skills, $userId);
     		
+    		// Return the profile
     		return $currentProfile;
-    		
     	} 
+    	// An error occurred, throw exception
     	catch (Exception $e) {
-    		// Throw exception
     		throw new Exception("Exception: " . $e->getMessage(), 0, $e);
     	}
-    	
     }
-    
-    
-    
-	public function viewAll() {
-		
-	}
-
     
 }

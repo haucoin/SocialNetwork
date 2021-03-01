@@ -2,7 +2,7 @@
 
 namespace App\Business;
 
-use App\Data\JobPostingDataService;
+use App\Data\PostingDataService;
 
 /**
  * @name Social Network
@@ -21,7 +21,7 @@ class PostBusinessService implements BusinessServiceInterface {
 	 * Default constructor to initialize the Data Service object
 	 */
 	public function __construct() {
-		$this->service = new JobPostingDataService();
+		$this->service = new PostingDataService();
 	}
 
 	

@@ -7,12 +7,12 @@ use Exception;
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
- * @desc - UserDataService is a DAO that is used to access the users table within the database
+ * @desc - JobDataService is a DAO that is used to access the job table within the database
  */
-Class JobDataService {
+class JobDataService implements DataServiceInterface {
     
 	// Define connection variable to be used as the database connection
     private $connection;
@@ -35,55 +35,35 @@ Class JobDataService {
     public function create($job) {
     	
     	try {
-    		
+    		// Check if the end date is null (alters SQL statement)
     		if($job->getEndDate() == null) {
-    			// SQL insert statement to create the profile within the database for the user of the passed in id
-    			$sqlProfile = "INSERT INTO `JOBS` (`TITLE`, `DESCRIPTION`, `COMPANY`, `LOCATION`, `START_DATE`, `END_DATE`, `USER_ID`)
+    			// SQL insert statement to create a job history within the database
+    			$sqlJob = "INSERT INTO `JOBS` (`TITLE`, `DESCRIPTION`, `COMPANY`, `LOCATION`, `START_DATE`, `END_DATE`, `USER_ID`)
 	                           VALUES ('{$job->getTitle()}', '{$job->getDescription()}', '{$job->getCompany()}', '{$job->getLocation()}', '{$job->getStartDate()}', null, '{$_SESSION['currentUser']->getId()}');";
     		}
+    		// End date was entered
     		else {
-	    		// SQL insert statement to create the profile within the database for the user of the passed in id
-	    		$sqlProfile = "INSERT INTO `JOBS` (`TITLE`, `DESCRIPTION`, `COMPANY`, `LOCATION`, `START_DATE`, `END_DATE`, `USER_ID`)
+    			// SQL insert statement to create a job history within the database
+	    		$sqlJob = "INSERT INTO `JOBS` (`TITLE`, `DESCRIPTION`, `COMPANY`, `LOCATION`, `START_DATE`, `END_DATE`, `USER_ID`)
 		                           VALUES ('{$job->getTitle()}', '{$job->getDescription()}', '{$job->getCompany()}', '{$job->getLocation()}', '{$job->getStartDate()}', '{$job->getEndDate()}', '{$_SESSION['currentUser']->getId()}');";
 	    	}
     		
-    		// Run the insert profile SQL statement
-    		$result = $this->connection->query($sqlProfile);
-    		
+    		// Run the insert SQL statement and return the result
+	    	$result = $this->connection->query($sqlJob);
     		return $result;
     	} 
+    	// An error occurred, throw exception
     	catch (Exception $e) {
-    		// Throw exception
     		throw new Exception("Exception: " . $e->getMessage(), 0, $e);
     	}
     	
     }
 
     
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see \App\Data\DataServiceInterface::update()
-	 */
-    public function update($job) {
-        
-    	try {
-	        
-	        // SQL update statements to update the user within the database to the user object passed in
-    		$sqlStatement = "UPDATE `JOBS` SET `TITLE` = '{$job->getTitle()}', `DESCRIPTION` = '{$job->getDescription()}', `COMPANY` = '{$job->getCompany()}', 
-                                    `LOCATION` = '{$job->getLocation()}', `START_DATE` = '{$job->getStartDate()}', `END_DATE` = '{$job->getEndDate()}' WHERE `JOBS`.`ID` = {$job->getId()};";
-	        
-	        // Run the update user SQL statement
-    		$result = $this->connection->query($sqlStatement);
-	        
-	        // Return the result
-	       return $result;
-    	}
-    	// An error occurred, throw exception
-    	catch(Exception $e) {
-    		throw new Exception("Exception: " . $e->getMessage(), 0, $e);
-    	}
-    }
+    /**
+     * UNUSED FOR THIS DATA SERVICE
+     */
+    public function update($job) { }
 
     
     /**
@@ -94,11 +74,10 @@ Class JobDataService {
     public function delete(int $id) {
     	
     	try {
-	        
-	        // SQL delete statements to remove the user's profile from the database given the id passed in
+    		// SQL delete statements to remove the user's job from the database given the id passed in
     		$sqlStatement = "DELETE FROM `JOBS` WHERE `ID`= {$id};";
 	        
-	        // Run the delete user SQL statement and add to affected rows
+    		// Run the delete user SQL statement
     		$result = $this->connection->query($sqlStatement);
 	        
 	        // Return the result
@@ -109,29 +88,44 @@ Class JobDataService {
         	throw new Exception("Exception: " . $e->getMessage(), 0, $e);
         }
     }
-
+    
+    
+    /**
+     * UNUSED FOR THIS DATA SERVICE
+     */
+    public function viewAll() { }
+    
+    
+    /**
+     * UNUSED FOR THIS DATA SERVICE
+     */
+    public function viewById(int $id) { }
+    
+    
+    // ---------------------- End of data interface implementation -------------------
 
     
     /**
-     * {@inheritDoc}
-     * 
-     * @see \App\Data\DataServiceInterface::viewById()
+     * Method to get all of the job history of a user
+     *
+     * @param $userId - Integer: The ID of the user
+     * @throws Exception
+     * @return $jobs - Array<Job>: A list (or array) of a user's job history
      */
-    public function viewByUserId(int $userId) {
+    public function viewAllById(int $userId) {
     	
     	try {
-    		// Create an array to store the users with an index
+    		// Create an array to store the job history with an index
     		$jobs = array();
     		$indexJob = 0;
     		
-    		// Select statment for profiles
+    		// SQL select statement to check to get job history of a user, run query
     		$sqlStatement = "SELECT * FROM JOBS WHERE USER_ID = {$userId}";
-    		
     		$resultsJobs = mysqli_query($this->connection, $sqlStatement);
     		
-    		// Iterate through all users retrieved
+    		// Iterate through all job history retrieved
     		while($row = $resultsJobs->fetch_assoc()) {
-    			// Get the id of current user
+    			// Set table column results to variables
     			$id = $row['ID'];
     			$title = $row['TITLE'];
     			$description = $row['DESCRIPTION'];
@@ -141,30 +135,22 @@ Class JobDataService {
     			$endDate = $row['END_DATE'];
     			$userId = $row['USER_ID'];
     			
-    			// Get the current user using the id
+    			// Create a new job object using the variables
     			$currentJob = new Job($id, $title, $description, $company, $location, $startDate, $endDate, $userId);
     			
-    			// Add the user object to the array
+    			// Add the job object to the array
     			$jobs[$indexJob] = $currentJob;
     			$indexJob++;
     		}
     		
-    		// Return the array of education objects
+    		// Return the array of job objects
     		return $jobs;
     		
     	} 
+    	// An error occurred, throw exception
     	catch (Exception $e) {
-    		// Throw exception
     		throw new Exception("Exception: " . $e->getMessage(), 0, $e);
     	}
-    	
     }
-    
-    
-    
-	public function viewAll() {
-		
-	}
-
     
 }

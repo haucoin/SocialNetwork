@@ -76,7 +76,7 @@ class EducationBusinessService implements BusinessServiceInterface {
 	 */
 	public function viewAllById($userId) {
 		// Call the viewByUserId method in EducationDataService
-		return $this->service->viewByUserId($userId);
+		return $this->service->viewAllById($userId);
 	}
 	
 }

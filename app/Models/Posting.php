@@ -8,7 +8,7 @@ namespace App\Models;
  *
  * @desc - JobPosting is a model class used to hold the data and properties of a job posting through different pages and methods
  */
-class JobPosting {
+class Posting {
     
 	// Define the properties of a job posting
     private $id;

@@ -7,12 +7,12 @@ use Exception;
 
 /**
  * @name Social Network
- * @version 2.0
+ * @version 4.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
- * @desc - UserDataService is a DAO that is used to access the users table within the database
+ * @desc - EducationDataService is a DAO that is used to access the education table within the database
  */
-Class EducationDataService {
+class EducationDataService implements DataServiceInterface {
     
 	// Define connection variable to be used as the database connection
     private $connection;
@@ -42,40 +42,21 @@ Class EducationDataService {
     		// Run the insert education SQL statement
     		$result = $this->connection->query($sqlStatement);
     		
+    		// Return the result
     		return $result;
     	} 
+    	// An error occurred, throw exception
     	catch (Exception $e) {
-    		// Throw exception
     		throw new Exception("Exception: " . $e->getMessage(), 0, $e);
     	}
     	
     }
 
     
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @see \App\Data\DataServiceInterface::update()
-	 */
-    public function update($education) {
-        
-    	try {
-	        
-	        // SQL update statements to update the user within the database to the user object passed in
-    		$sqlStatement = "UPDATE `EDUCATION` SET `SCHOOL` = '{$education->getSchool()}', `DEGREE` = '{$education->getDegree()}', `FIELD_OF_STUDY` = '{$education->getFieldOfStudy()}', 
-                                    `GRADUATION_YEAR` = '{$education->getGraduationYear()}', `GPA` = '{$education->getGpa()}' WHERE `EDUCATION`.`ID` = {$education->getId()};";
-	        
-	        // Run the update user SQL statement
-    		$result = $this->connection->query($sqlStatement);
-	        
-	        // Return the result
-	       return $result;
-    	}
-    	// An error occurred, throw exception
-    	catch(Exception $e) {
-    		throw new Exception("Exception: " . $e->getMessage(), 0, $e);
-    	}
-    }
+    /**
+     * UNUSED FOR THIS DATA SERVICE
+     */
+    public function update($education) { }
 
     
     /**
@@ -87,10 +68,10 @@ Class EducationDataService {
     	
     	try {
 	        
-	        // SQL delete statements to remove the user's profile from the database given the id passed in
+	        // SQL delete statements to remove the user's education from the database given the id passed in
     		$sqlStatement = "DELETE FROM `EDUCATION` WHERE `ID`= {$id};";
 	        
-	        // Run the delete user SQL statement and add to affected rows
+	        // Run the delete user SQL statement
     		$result = $this->connection->query($sqlStatement);
 	        
 	        // Return the result
@@ -101,29 +82,44 @@ Class EducationDataService {
         	throw new Exception("Exception: " . $e->getMessage(), 0, $e);
         }
     }
-
-
+    
     
     /**
-     * {@inheritDoc}
-     * 
-     * @see \App\Data\DataServiceInterface::viewById()
+     * UNUSED FOR THIS DATA SERVICE
      */
-    public function viewByUserId(int $userId) {
+    public function viewAll() { }
+    
+    
+    /**
+     * UNUSED FOR THIS DATA SERVICE
+     */
+    public function viewById(int $id) { }
+    
+    
+    // ---------------------- End of data interface implementation -------------------
+
+
+    /**
+     * Method to get all of the education history of a user
+     * 
+     * @param $userId - Integer: The ID of the user
+     * @throws Exception
+     * @return $education - Array<Education>: A list (or array) of a user's education history
+     */
+    public function viewAllById(int $userId) {
     	
     	try {
-    		// Create an array to store the users with an index
+    		// Create an array to store the education history with an index
     		$education = array();
     		$indexEducation = 0; 
     		
-    		// Select statment for profiles
+    		// SQL select statement to check to get education history of a user, run query
     		$sqlStatement = "SELECT * FROM EDUCATION WHERE USER_ID = {$userId}";
-    		
     		$resultsEducation = mysqli_query($this->connection, $sqlStatement);
     		
-    		// Iterate through all users retrieved
+    		// Iterate through all education history retrieved
     		while($row = $resultsEducation->fetch_assoc()) {
-    			// Get the id of current user
+    			// Set table column results to variables
     			$id = $row['ID'];
     			$school = $row['SCHOOL'];
     			$degree = $row['DEGREE'];
@@ -132,10 +128,10 @@ Class EducationDataService {
     			$gpa = $row['GPA'];
     			$userId = $row['USER_ID'];
     			
-    			// Get the current user using the id
+    			// Create a new education object using the variables
     			$currentEducation = new Education($id, $school, $degree, $fieldOfStudy, $graduationYear, $gpa, $userId);
     			
-    			// Add the user object to the array
+    			// Add the education object to the array
     			$education[$indexEducation] = $currentEducation;
     			$indexEducation++;
     		}
@@ -144,18 +140,11 @@ Class EducationDataService {
     		return $education;
     		
     	} 
+    	// An error occurred, throw exception
     	catch (Exception $e) {
-    		// Throw exception
     		throw new Exception("Exception: " . $e->getMessage(), 0, $e);
     	}
     	
     }
-    
-    
-    
-	public function viewAll() {
-		
-	}
-
     
 }

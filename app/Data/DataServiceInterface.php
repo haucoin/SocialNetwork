@@ -23,7 +23,7 @@ interface DataServiceInterface {
     
     
     /**
-     *Method to update an object within a database table by passing it to the data service
+     * Method to update an object within a database table by passing it to the data service
      * @param $object - Generic: An object Model
      */
     public function update($object);

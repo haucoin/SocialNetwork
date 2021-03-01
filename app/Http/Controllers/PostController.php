@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use App\Models\JobPosting;
+use App\Models\Posting;
 use App\Business\PostBusinessService;
 
 /**
@@ -76,8 +76,8 @@ class PostController extends Controller {
     	$salary = $request->input('salary');
     	$location = $request->input('location');
     	
-    	// Create a new JobPosting object using the variables
-    	$posting = new JobPosting(0, $company, $title, $description, $salary, $location);
+    	// Create a new Posting object using the variables
+    	$posting = new Posting(0, $company, $title, $description, $salary, $location);
     	
     	// Call create method in PostBusinessService
     	$this->postService->create($posting);
