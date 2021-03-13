@@ -35,7 +35,7 @@ class PostController extends Controller {
      */
     public function viewAllPosts() {
     	// Call viewAll method in PostBusinessService and set to variable
-    	$jobPostings = $this->postService->viewAll();
+    	$jobPostings = $this->postService->viewAll();	
     	
     	// Set $data variable to a the jobPostings and return to the profile view
     	$data = ['postList' => $jobPostings];
@@ -159,5 +159,43 @@ class PostController extends Controller {
     	return view('jobPostings')->with($data);
     }
     
+     
+    /**
+     * Method to search the job postings
+     *
+     * @param $request - Request: The request object sent from the form submission
+     * @return 'jobPostings' - View: The job posting page that displays all job postings that match the search
+     */
+    public function searchJobPostings(Request $request) {
+    	// Get the variable within $request passed in through the form
+    	$searchParam = $request->input('searchParam');
+    	
+    	// Call search method in PostBusinessService and set to variable
+    	$posts = $this->postService->search($searchParam);
+    	
+    	// Set $data variable to the post variable and return to the editJobPosting view
+    	$data = ['postList' => $posts];
+    	return view('jobPostings')->with($data);
+    }
+    
+    
+    /**
+     * Method to sort the job postings
+     *
+     * @param $request - Request: The request object sent from the form submission
+     * @return 'jobPostings' - View: The job posting page that displays all job postings sorted by the chosen column
+     */
+    public function sortJobPostings(Request $request) {
+    	// Get the variables within $request passed in through the form
+    	$sortBy = $request->input('sortBy');
+    	$jobPostings = unserialize(base64_decode($_POST['postList']));
+    	
+    	// Call sort method in PostBusinessService and set to variable
+    	$posts = $this->postService->sort($sortBy, $jobPostings);
+    	
+    	// Set $data variable to the post variable and return to the editJobPosting view
+    	$data = ['postList' => $posts];
+    	return view('jobPostings')->with($data);
+    }
 
 }

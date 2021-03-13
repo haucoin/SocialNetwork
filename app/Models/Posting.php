@@ -94,5 +94,6 @@ class Posting {
         $this->location = $location;
     }
     
+    
 }
 

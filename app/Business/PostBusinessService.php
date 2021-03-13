@@ -78,6 +78,53 @@ class PostBusinessService implements BusinessServiceInterface {
 		// Call the viewById method in PostDataService
 		return $this->service->viewById($id);
 	}
+	
+	
+	// ---------------------- End of business interface implementation -------------------
+	
+	
+	/**
+	 * Method to get all postings that match a search parameter
+	 *
+	 * @param $searchParam - String: The search parameter that was entered by the user
+	 * @return 'search' - Method: Retrieves all postings that match the search parameter
+	 */
+	public function search($searchParam) {
+		// Call the search method in PostingDataService
+		return $this->service->search($searchParam);
+	}
+	
+	
+	/*
+	*
+	* @param $sortBy - String: which column button was clicked
+	* @param $jobPostings - Array<Posting>: the list of job postings
+	* @return $jobPostings - Array<Posting>: sorted list of job postings
+	*/
+	public function sort($sortBy, $jobPostings){
+		
+		/*
+		* Based of the $sortBy string this method will sort the list of job postings.
+		*
+		* If $sortBy is id, the list is sorted by the id number
+		* Else if $sortBy is companyName, the list is sorted by the companyNames
+		* Else if $sortBy is jobTitle, the list is sorted by the jobTitles
+		* Else if $sortBy is location, the list is sorted by the locations
+		*
+		*/
+		if($sortBy == "id"){
+			usort($jobPostings, function($a, $b) {return strcmp($a->getId(), $b->getId());});
+		}else if($sortBy == "companyName"){
+			usort($jobPostings, function($a, $b) {return strcmp($a->getCompanyName(), $b->getCompanyName());});
+		}else if($sortBy == "jobTitle"){
+			usort($jobPostings, function($a, $b) {return strcmp($a->getJobTitle(), $b->getJobTitle());});
+		}else if($sortBy == "location"){
+			usort($jobPostings, function($a, $b) {return strcmp($a->getLocation(), $b->getLocation());});
+		}
+		
+		// return the sorted list
+		return $jobPostings;
+	}
 
 }
 

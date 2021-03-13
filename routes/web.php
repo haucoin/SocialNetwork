@@ -149,6 +149,12 @@ Route::post('/updatePost', 'PostController@updatePost');
 // Call the deletePost method within the PostController using the /deletePost route
 Route::post('/deletePost', 'PostController@deletePost');
 
+// Call the searchJobPostings method within the PostController using the /searchJobPostings route
+Route::post('/searchJobPostings', 'PostController@searchJobPostings');
+
+// Call the sortJobPostings method within the PostController using the /sortJobPostings route
+Route::post('/sortJobPostings', 'PostController@sortJobPostings');
+
 
 
 /**

@@ -98,7 +98,7 @@ class PostingDataService implements DataServiceInterface {
             throw new Exception("Exception: " . $e->getMessage(), 0, $e);
         }
     }
-
+    
     
     /**
      * {@inheritDoc}
@@ -139,7 +139,7 @@ class PostingDataService implements DataServiceInterface {
             throw new Exception("Exception: " . $e->getMessage(), 0, $e);
         }
     }
-
+    
     
     /**
      * {@inheritDoc}
@@ -168,6 +168,51 @@ class PostingDataService implements DataServiceInterface {
     		
     		// Return the posting
     		return $currentJobPost;
+    	}
+    	// An error occurred, throw exception
+    	catch (Exception $e) {
+    		throw new Exception("Exception: " . $e->getMessage(), 0, $e);
+    	}
+    }
+    
+    
+    // ---------------------- End of data interface implementation -------------------
+    
+    
+    /**
+     *
+     * @param $seachParam - String: The search string sent by the user
+     * @throws Exception
+     * @return $jobPosts - Array<Posting>: A list (or array) of job postings
+     */
+    public function search($searchParam) {
+    	
+    	try {
+    		
+    		// Create an array and index for job postings
+    		$jobPosts = array();
+    		$indexJobPost = 0;
+    		
+    		// SQL select statement to get a posting given the search term, run query
+    		$sqlJobPost = "SELECT * FROM JOB_POSTINGS WHERE COMPANY_NAME LIKE '%{$searchParam}%' OR JOB_TITLE LIKE '%{$searchParam}%'";
+    		$resultsJobPost = mysqli_query($this->connection, $sqlJobPost);
+    		
+    		// Iterate through each row retrieved
+    		while ($row = $resultsJobPost->fetch_assoc()) {
+    			
+    			// Get the ID column from the results and set to variable
+    			$id = $row['ID'];
+    			
+    			// Get the current posting by calling viewById method
+    			$currentJobPost = $this->viewByID($id);
+    			
+    			// Set the current array position to the current posting, increment index
+    			$jobPosts[$indexJobPost] = $currentJobPost;
+    			$indexJobPost ++;
+    		}
+    		
+    		// Return the job postings list
+    		return $jobPosts;
     	}
     	// An error occurred, throw exception
     	catch (Exception $e) {
