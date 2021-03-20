@@ -6,7 +6,7 @@ use App\Data\ProfileDataService;
 
 /**
  * @name Social Network
- * @version 4.0
+ * @version 6.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - ProfileBusinessService is a class that performs all business logic on the user profile data being sent and retrieved from the database

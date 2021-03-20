@@ -20,8 +20,15 @@
     
     	 <table style="width: 100%">
     	 	<tr>
-    	 		@if(session()->get('currentUser')->getRole() == 0)	
-	    		<td align="left">
+	    	 	<td align="left">
+		    		<form class="form-inline" method="post" action="searchJobPostings">
+		            	<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
+		            	<input class="form-control mr-sm-2" type="search" name="searchParam" placeholder="Search">
+		            	<button class="btn btn-info" style="color: white !important" type="submit">Search</button>
+		            </form>
+	    		</td>
+	    		@if(session()->get('currentUser')->getRole() == 0)	
+	    		<td align="right">
 	    			<form method="GET" action="addPosting">
 						<button type="submit" style="font-size: 10px; border: 0; background-color: transparent">
 	                		<i class="material-icons">add_box</i>
@@ -29,13 +36,6 @@
 	            	</form>
 	            </td>
 	            @endif
-	    	 	<td align="right">
-		    		<form class="form-inline" method="post" action="searchJobPostings">
-		            	<input type="hidden" name ="_token" value="<?php echo csrf_token()?>"/>
-		            	<input class="form-control mr-sm-2" type="search" name="searchParam" placeholder="Search">
-		            	<button class="btn btn-info" style="color: white !important" type="submit">Search</button>
-		            </form>
-	    		</td>
             </tr>
         </table>
 

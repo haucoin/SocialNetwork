@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use JsonSerializable;
+
 /**
  * @name Social Network
  * @version 4.0
@@ -9,7 +11,7 @@ namespace App\Models;
  *
  * @desc - Profile is a model class used to hold the data and properties of a user's profile through different pages and methods
  */
-Class Profile {
+Class Profile implements \JsonSerializable {
 	
 	// Define the properties of a profile
 	private $id;
@@ -94,5 +96,14 @@ Class Profile {
 		$this->userId = $userId;
 	}
     
-   
+	
+	/**
+	 * Method to serialize the object as json
+	 *
+	 * {@inheritDoc}
+	 * @see JsonSerializable::jsonSerialize()
+	 */
+	public function jsonSerialize() {
+		return get_object_vars($this);
+	}
 }

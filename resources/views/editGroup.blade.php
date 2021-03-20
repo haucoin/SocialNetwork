@@ -6,7 +6,7 @@
 	<div style="padding-bottom: 15px; background: #14A3B8; color: #fff; padding: 16px 30px; margin: -20px -25px 10px; border-radius: 3px 3px 0 0;">
 		<h2>Edit Group</h2>
 	</div>
-	<form method="POST" action="updateGroup">
+	<form method="POST" action="updateGroup" class="was-validated">
 		<input type="hidden" name="_token" value="<?php echo csrf_token()?>" />
 		<input type="hidden" name="groupId" name="groupId" value="{{$group->getId()}}">
 		<table style="width: 100%;">
@@ -20,9 +20,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="name">Name</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<input id="name" name="name" type="text" placeholder="Enter the Name" value="{{ $group->getName() }}" class="form-control input-md" required>
-							</div>
+							<input id="name" name="name" type="text" placeholder="Enter the Name" value="{{ $group->getName() }}" class="form-control input-md" minlength="2" maxlength="100" required="required">
+						    <div class="invalid-feedback">Valid group name required.</div>
 						</div>
 					</div>
 				</td>
@@ -32,9 +31,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="description">Description</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<textarea class="form-control" rows="8" id="description" name="description" placeholder="Enter the Description" style="color: grey" required>{{$group->getDescription()}}</textarea>
-							</div>
+							<textarea class="form-control" rows="8" id="description" name="description" placeholder="Enter the Description" style="color: grey" minlength="2" maxlength="2000" required="required">{{$group->getDescription()}}</textarea>
+						    <div class="invalid-feedback">Valid description required.</div>
 						</div>
 					</div>
 				</td>

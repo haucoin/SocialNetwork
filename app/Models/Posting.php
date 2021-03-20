@@ -1,6 +1,8 @@
 <?php
 namespace App\Models;
 
+use JsonSerializable;
+
 /**
  * @name Social Network
  * @version 4.0
@@ -8,7 +10,7 @@ namespace App\Models;
  *
  * @desc - JobPosting is a model class used to hold the data and properties of a job posting through different pages and methods
  */
-class Posting {
+class Posting implements \JsonSerializable {
     
 	// Define the properties of a job posting
     private $id;
@@ -94,6 +96,16 @@ class Posting {
         $this->location = $location;
     }
     
+    
+    /**
+     * Method to serialize the object as json
+     *
+     * {@inheritDoc}
+     * @see JsonSerializable::jsonSerialize()
+     */
+	public function jsonSerialize() { 
+		return get_object_vars($this);
+	}
     
 }
 

@@ -4,7 +4,7 @@ namespace App\Business;
 
 /**
  * @name Social Network
- * @version 4.0
+ * @version 6.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - BusinessServiceInterface is an interface used to define the structure for all business services

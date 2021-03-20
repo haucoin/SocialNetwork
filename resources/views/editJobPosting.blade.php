@@ -6,7 +6,7 @@
 	<div style="padding-bottom: 15px; background: #14A3B8; color: #fff; padding: 16px 30px; margin: -20px -25px 10px; border-radius: 3px 3px 0 0;">
 		<h2>Edit Job Posting</h2>
 	</div>
-	<form method="POST" action="updatePost">
+	<form method="POST" action="updatePost" class="was-validated">
 		<input type="hidden" name="_token" value="<?php echo csrf_token()?>" />
 		<input type="hidden" name="postId" name="postId" value="{{$currentPost->getId()}}">
 		<table style="width: 100%;">
@@ -20,9 +20,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="companyName">Company Name</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<input id="companyName" name="companyName" type="text" placeholder="Enter the Company Name" class="form-control input-md" value="{{ $currentPost->getCompanyName() }}" style="color: grey" required>
-							</div>
+							<input id="companyName" name="companyName" type="text" placeholder="Enter the Company Name" class="form-control input-md" value="{{ $currentPost->getCompanyName() }}" style="color: grey" minlength="2" maxlength="150" required="required">
+						    <div class="invalid-feedback">Valid company name required.</div>
 						</div>
 					</div>
 				</td>
@@ -30,9 +29,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="jobTitle">Position Title</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<input id="jobTitle" name="jobTitle" type="text" placeholder="Enter the Job Title" class="form-control input-md" value="{{ $currentPost->getJobTitle() }}" style="color: grey" required />
-							</div>
+							<input id="jobTitle" name="jobTitle" type="text" placeholder="Enter the Job Title" class="form-control input-md" value="{{ $currentPost->getJobTitle() }}" style="color: grey" minlength="2" maxlength="150" required="required" />
+						    <div class="invalid-feedback">Valid position title required.</div>
 						</div>
 					</div>
 				</td>
@@ -42,9 +40,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="jobDescription">Description</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<textarea class="form-control" rows="8" id="jobDescription" name="jobDescription" placeholder="Enter the Job Description" style="color: grey" required>{{$currentPost->getJobDescription()}}</textarea>
-							</div>
+							<textarea class="form-control" rows="8" id="jobDescription" name="jobDescription" placeholder="Enter the Job Description" style="color: grey" minlength="2" maxlength="1500" required="required">{{$currentPost->getJobDescription()}}</textarea>
+						    <div class="invalid-feedback">Valid description required.</div>
 						</div>
 					</div>
 				</td>
@@ -54,9 +51,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="salary">Salary</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<input id="salary" name="salary" type="number" min="0" max="1000000" step=".01" placeholder="Enter the Salary" class="form-control input-md" value="{{ $currentPost->getSalary() }}" style="color: grey" required />
-							</div>
+							<input id="salary" name="salary" type="number" min="0" max="1000000" step=".01" placeholder="Enter the Salary" class="form-control input-md" value="{{ $currentPost->getSalary() }}" style="color: grey" required="required" />
+						    <div class="invalid-feedback">Valid salary required.</div>
 						</div>
 					</div>
 				</td>
@@ -64,9 +60,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="location">Location</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<input id="location" name="location" type="text" placeholder="Enter the Location" class="form-control input-md" value="{{ $currentPost->getLocation() }}" style="color: grey" required />
-							</div>
+							<input id="location" name="location" type="text" placeholder="Enter the Location" class="form-control input-md" value="{{ $currentPost->getLocation() }}" style="color: grey" minlength="2" maxlength="150" required="required" />
+						    <div class="invalid-feedback">Valid location required.</div>
 						</div>
 					</div>
 				</td>

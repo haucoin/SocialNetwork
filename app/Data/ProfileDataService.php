@@ -7,7 +7,7 @@ use Exception;
 
 /**
  * @name Social Network
- * @version 4.0
+ * @version 6.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - ProfileDataService is a DAO that is used to access the profiles table within the database
@@ -114,7 +114,7 @@ class ProfileDataService implements DataServiceInterface {
     		
     		// Create a new profile object using the variables
     		$currentProfile = new Profile($id, $bio, $city, $state, $skills, $userId);
-    		
+
     		// Return the profile
     		return $currentProfile;
     	} 

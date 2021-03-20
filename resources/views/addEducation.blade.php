@@ -8,7 +8,7 @@
 		style="padding-bottom: 15px; background: #14A3B8; color: #fff; padding: 16px 30px; margin: -20px -25px 10px; border-radius: 3px 3px 0 0;">
 		<h2>Education</h2>
 	</div>
-	<form method="POST" action="createEducation">
+	<form method="POST" action="createEducation" class="was-validated">
 		<input type="hidden" name="_token" value="<?php echo csrf_token()?>" />
 		<table style="width: 100%;">
 			<tr>
@@ -21,9 +21,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="school">School</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<input id="school" name="school" type="text" placeholder="Enter the School Name" class="form-control input-md" required>
-							</div>
+							<input id="school" name="school" type="text" placeholder="Enter the School Name" class="form-control input-md" minlength="2" maxlength="100" required="required">
+							<div class="invalid-feedback">Valid school required.</div>
 						</div>
 					</div>
 				</td>
@@ -33,15 +32,15 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="lastName">Degree</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<select id="degree" name="degree" class="form-control" style="color: grey">
-										<option selected="selected" value="-">-</option>
-										<option value="Associate">Associate</option>
-										<option value="Bachelors">Bachelors</option>
-										<option value="Masters">Masters</option>
-										<option value="Doctorate">Doctorate</option>
-								</select>
-							</div>
+							<select id="degree" name="degree" class="form-control" required style="color: grey">
+									<option value="">Select a Degree</option>
+									<option value="GED">GED</option>
+									<option value="Associate">Associate</option>
+									<option value="Bachelors">Bachelors</option>
+									<option value="Masters">Masters</option>
+									<option value="Doctorate">Doctorate</option>
+							</select>
+							<div class="invalid-feedback">Valid degree required.</div>
 						</div>
 					</div>
 				</td>
@@ -49,9 +48,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="fieldOfStudy">Field of Study</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<input id="fieldOfStudy" name="fieldOfStudy" type="text" placeholder="Enter the Field of Study" class="form-control input-md" required>
-							</div>
+							<input id="fieldOfStudy" name="fieldOfStudy" type="text" placeholder="Enter the Field of Study" class="form-control input-md" minlength="2" maxlength="100" required="required">
+							<div class="invalid-feedback">Valid field of study required.</div>
 						</div>
 					</div>
 				</td>
@@ -61,9 +59,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="graduationYear">Graduation Year</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<input id="graduationYear" name="graduationYear" type="number" min="1900" max="2030" placeholder="Enter the Graduation Year" class="form-control input-md" required>
-							</div>
+							<input id="graduationYear" name="graduationYear" type="number" min="1900" max="2030" placeholder="Enter the Graduation Year" class="form-control input-md" required="required">
+							<div class="invalid-feedback">Valid graduation year required.</div>
 						</div>
 					</div>
 				</td>
@@ -71,9 +68,8 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="gpa">GPA</label>
 						<div class="col-md-12">
-							<div class="input-group-prepend">
-								<input id="gpa" name="gpa" type="number" min="0" max="5" step="any" placeholder="Enter the GPA" class="form-control input-md" required>
-							</div>
+							<input id="gpa" name="gpa" type="number" min="0" max="5" step="any" placeholder="Enter the GPA" class="form-control input-md" required="required">
+							<div class="invalid-feedback">Valid GPA required.</div>
 						</div>
 					</div>
 				</td>
@@ -82,7 +78,7 @@
 			<tr>
 				<td colspan="2" >
 					<div align="center">
-						<input type="submit" value="Save Changes" class="btn btn-info">
+						<input type="submit" value="Save Changes" class="btn btn-info">				
 					</div>
 				</td>
 			</tr>

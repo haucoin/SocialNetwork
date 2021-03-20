@@ -21,6 +21,12 @@
 	                   	</button>
 	                </form>
 				</td>
+				@else
+				<td align="right">
+					<form method="GET" action="apply">
+	                    <input type="submit" value="Apply" class="btn btn-info">
+	                </form>
+				</td>
 				@endif
 			</tr>
 			<tr>

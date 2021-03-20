@@ -2,7 +2,7 @@
 
 /**
  * @name Social Network
- * @version 4.0
+ * @version 6.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - Web.app is a file that outlines the necessary routes for the application
@@ -17,11 +17,14 @@
 // Route to the index page using the / route
 Route::get('/', function () { return view('index'); });
 
-// Route to the home page using the /home route
-Route::get('/home', function () { return view('homePage'); });
+// Call the viewHome method within the UserController using the /home route
+Route::get('/home', 'UserController@viewHome');
 
 // Route to the settings page using the /settings route
 Route::get('/settings', function() { return view('settings'); });
+
+// Route to the error page using the /errorPage route
+Route::get('/error', function() { return view('error'); });
 
 
 
@@ -128,6 +131,12 @@ Route::get('/jobPostings', 'PostController@viewAllPosts')->name("jobPostings");
 // Call the viewUser method within the PostController using the /viewPost route
 Route::post('/viewPost', 'PostController@viewPost');
 
+// Route to the application page using the /apply route
+Route::get('/apply', function () { return view('application'); });
+
+// Call the sortJobPostings method within the PostController using the /submitApplication route
+Route::post('/submitApplication', 'PostController@viewAllPosts');
+
 
 
 /**
@@ -194,4 +203,19 @@ Route::post('/updateGroup', 'GroupController@updateGroup');
 // Call the deleteGroup method within the GroupController using the /deleteGroup route
 Route::post('/deleteGroup', 'GroupController@deleteGroup');
 
+
+
+/**
+ * ProfileRESTController routes
+ */
+
+Route::resource('/profilerest', 'ProfileRESTController');
+
+
+
+/**
+ * PostingRESTController routes
+ */
+
+Route::resource('/postingrest', 'PostingRESTController');
 

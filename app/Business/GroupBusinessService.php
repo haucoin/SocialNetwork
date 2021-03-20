@@ -6,7 +6,7 @@ use App\Data\GroupDataService;
 
 /**
  * @name Social Network
- * @version 4.0
+ * @version 6.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - GroupBusinessService is a class that performs all business logic on the group data being sent and retrieved from the database
