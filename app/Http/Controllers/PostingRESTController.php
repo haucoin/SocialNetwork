@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Business\PostBusinessService;
 use App\Models\DTO;
-use Illuminate\Support\Facades\Log;
+use App\Utility\LoggerInterface;
 use Exception;
 
 /**
@@ -16,6 +16,23 @@ use Exception;
  */
 class PostingRESTController extends Controller {
 	
+	// Define service variable to be used as PostBusinessService
+	private $postService;
+	
+	// Define protected logger variable
+	protected $logger;
+	
+	
+	/**
+	 * Default constructor to initialize the Business Service object as well as the logging interface
+	 */
+	function __construct(LoggerInterface $logger) {
+		$this->postService = new PostBusinessService();
+		
+		$this->logger = $logger;
+	}
+	
+	
     /**
      * Method to display all posting objects
      *
@@ -24,12 +41,11 @@ class PostingRESTController extends Controller {
     public function index() { 
     	
     	// Logging entering method
-    	Log::info("======> Entering PostingRESTController.index()");
+    	$this->logger->info("======> Entering PostingRESTController.index()");
     	
     	try {
-    		// Initialize the Post Business Service object, call viewAll method and set to variable
-    		$jobsService = new PostBusinessService();
-    		$jobs = $jobsService->viewAll();
+    		// Call viewAll method and set to variable
+    		$jobs = $this->postService->viewAll();
     		
     		// Check if the variable is null, set DTO to no data found
     		if($jobs == null) {
@@ -44,7 +60,7 @@ class PostingRESTController extends Controller {
     		$json = json_encode($dto);
     		
     		// Logging leaving method and return json object
-    		Log::info("======> Leaving PostingRESTController.index()");
+    		$this->logger->info("======> Leaving PostingRESTController.index()");
     		return $json;
     	}
     	// An error occurred
@@ -56,7 +72,7 @@ class PostingRESTController extends Controller {
     		$json = json_encode($dto);
     		
     		// Logging with an error  and return json object
-    		Log::error("*** Error: PostingRESTController.index() ", array("message" => $e->getMessage()));
+    		$this->logger->error("*** Error: PostingRESTController.index() ", array("message" => $e->getMessage()));
     		return $json;
      	}
     }
@@ -71,12 +87,11 @@ class PostingRESTController extends Controller {
     public function show($id) {
     	
     	// Logging entering method
-    	Log::info("======> Entering PostingRESTController.show()");
+    	$this->logger->info("======> Entering PostingRESTController.show()");
     	
     	try {
-    		// Initialize the Post Business Service object, call viewById method and set to variable
-    		$jobsService = new PostBusinessService();
-    		$job = $jobsService->viewById($id);
+    		// Call viewById method and set to variable
+    		$job = $this->postService->viewById($id);
     		
     		// Check if the attributes are null (to know the data that was retrieved is empty), set DTO to no data found
     		if($job->getCompanyName() == null && $job->getJobTitle() == null) {
@@ -91,7 +106,7 @@ class PostingRESTController extends Controller {
     		$json = json_encode($dto);
     		
     		// Logging leaving method and return json object
-    		Log::info("======> Leaving PostingRESTController.show()");
+    		$this->logger->info("======> Leaving PostingRESTController.show()");
     		return $json;
     	}
     	// An error occurred
@@ -103,7 +118,7 @@ class PostingRESTController extends Controller {
     		$json = json_encode($dto);
     		
     		// Logging with an error  and return json object
-    		Log::error("*** Error: PostingRESTController.show() ", array("message" => $e->getMessage()));
+    		$this->logger->error("*** Error: PostingRESTController.show() ", array("message" => $e->getMessage()));
     		return $json;
     	}
     }

@@ -50,12 +50,23 @@ class JobController extends Controller {
     	
     	try {
     		// Get the variables within $request passed in through the form
-    		$title = $request->input('title');
-    		$description = $request->input('description');
-    		$company = $request->input('company');
-    		$location = $request->input('location');
+    		$titleStart = $request->input('title');
+    		$descriptionStart = $request->input('description');
+    		$companyStart = $request->input('company');
+    		$locationStart = $request->input('location');
     		$startDate = $request->input('startDate');
     		$endDate = $request->input('endDate');
+    		
+    		// Replace all ' with \' to allow for ' in SQL statements in the data layer
+    		$titleReplace = str_replace("'", "\'", $titleStart);
+    		$descriptionReplace = str_replace("'", "\'", $descriptionStart);
+    		$companyReplace = str_replace("'", "\'", $companyStart);
+    		$locationReplace = str_replace("'", "\'", $locationStart);
+    		// Replace all " with \" to allow for " in SQL statements in the data layer
+    		$title = str_replace('"', '\"', $titleReplace);
+    		$description = str_replace('"', '\"', $descriptionReplace);
+    		$company = str_replace('"', '\"', $companyReplace);
+    		$location = str_replace('"', '\"', $locationReplace);
     		
     		// Check if there was an end date inserted, if not set to null
     		if($endDate == "") {

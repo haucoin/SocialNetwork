@@ -23,7 +23,7 @@ class DTO implements \JsonSerializable {
      *
      * @param $errorCode - Integer: The code status of an HTTP request
      * @param $errorMessage - String: The message of an HTTP request
-     * @param $data - Array: The data that is being passed from the HTTP request
+     * @param $data - Object: The data that is being passed from the HTTP request
      */
     public function __construct($errorCode, $errorMessage, $data){
         

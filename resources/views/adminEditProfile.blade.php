@@ -160,6 +160,7 @@
 					<tr>
 						<td>
 							<h5>Education History</h5>
+							<br/>
 						</td>
 					</tr>
 					@if($educationHistory == null)
@@ -169,11 +170,21 @@
 							</td>
 						</tr>
 					@else
+						@foreach($educationHistory as $education)
 						<tr>
 							<td>
-								<p style="color: grey">this will do something later</p>
+								<p id="school" name="school" style="color: grey"><b style="color: black">School:  </b>{{$education->getSchool()}}</p>
+								<p id="degree" name="degree" style="color: grey"><b style="color: black">Degree:  </b>{{$education->getDegree()}}</p>
+								@if($education->getFieldOfStudy() != null || $education->getFieldOfStudy() != "")
+								<p id="fieldOfStudy" name="fieldOfStudy" style="color: grey"><b style="color: black">Field of Study:  </b>{{$education->getFieldOfStudy()}}</p>
+								@endif
+								<p id="graduationYear" name="graduationYear" style="color: grey"><b style="color: black">Graduation Year:  </b>{{$education->getGraduationYear()}}</p>
+								<p id="gpa" name="gpa" style="color: grey"><b style="color: black">GPA:  </b>{{$education->getGpa()}}</p>
+								<br/>
+								<br/>
 							</td>
 						</tr>
+						@endforeach
 					@endif
 				</table>
 			
@@ -183,10 +194,11 @@
 			</td>
 			<td style="width: 50%; vertical-align: top; padding-left: 15px">
 				<!-- Job History table -->
-				<table style="width: 100%; padding-left: 5px">
+				<table style="width: 100%; padding-left: 10px">
 					<tr>
-						<td style="padding-left: 10px;">
+						<td>
 							<h5>Job History</h5>
+							<br/>
 						</td>
 					</tr>
 					<tr>
@@ -200,7 +212,18 @@
 							@foreach($jobHistory as $job)
 							<tr>
 								<td>
-									<p style="color: grey"></p>
+									<p id="title" name="title" style="color: grey"><b style="color: black">Position:  </b>{{$job->getTitle()}}</p>
+									<p id="description" name="description" style="color: grey"><b style="color: black">Description:  </b>{{$job->getDescription()}}</p>
+									<p id="company" name="company" style="color: grey"><b style="color: black">Company:  </b>{{$job->getCompany()}}</p>
+									<p id="location" name="location" style="color: grey"><b style="color: black">Location:  </b>{{$job->getLocation()}}</p>
+									<p id="startDate" name="startDate" style="color: grey"><b style="color: black">Start Date:  </b>{{$job->getStartDate()}}</p>
+									@if($job->getEndDate() == null)
+										<p id="startDate" name="startDate" style="color: grey"><b style="color: black">End Date:  </b>Present</p>
+									@else
+										<p id="startDate" name="startDate" style="color: grey"><b style="color: black">End Date:  </b>{{$job->getEndDate()}}</p>
+									@endif
+									<br/>
+									<br/>
 								</td>
 							</tr>
 							@endforeach

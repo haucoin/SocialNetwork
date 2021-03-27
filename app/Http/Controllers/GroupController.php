@@ -195,8 +195,15 @@ class GroupController extends Controller {
     	
     	try {
     		// Get the variables within $request passed in through the form
-    		$name = $request->input('name');
-    		$description = $request->input('description');
+    		$nameStart = $request->input('name');
+    		$descriptionStart = $request->input('description');
+    		
+    		// Replace all ' with \' to allow for ' in SQL statements in the data layer
+    		$nameReplace = str_replace("'", "\'", $nameStart);
+    		$descriptionReplace = str_replace("'", "\'", $descriptionStart);
+    		// Replace all " with \" to allow for " in SQL statements in the data layer
+    		$name = str_replace('"', '\"', $nameReplace);
+    		$description = str_replace('"', '\"', $descriptionReplace);
     		
     		// Create a new group object using the varibles
     		$group = new Group(0, $name, $description);
@@ -267,8 +274,15 @@ class GroupController extends Controller {
     	try {
     		// Get the variables within $request passed in through the form
     		$id = $request->input('groupId');
-    		$name =  $request->input('name');
-    		$description =  $request->input('description');
+    		$nameStart =  $request->input('name');
+    		$descriptionStart =  $request->input('description');
+    		
+    		// Replace all ' with \' to allow for ' in SQL statements in the data layer
+    		$nameReplace = str_replace("'", "\'", $nameStart);
+    		$descriptionReplace = str_replace("'", "\'", $descriptionStart);
+    		// Replace all " with \" to allow for " in SQL statements in the data layer
+    		$name = str_replace('"', '\"', $nameReplace);
+    		$description = str_replace('"', '\"', $descriptionReplace);
     		
     		// Call viewById method in GroupBusinessService and set to variable
     		$group = $this->groupService->viewById($id);

@@ -15,7 +15,7 @@ function togglePassword() {
 }
 </script>
 
-<div align="center" style="padding-top: 25px">
+<div align="center" style="padding-top: 80px">
     <h2>Registration</h2><br>
     @if(isset($returnMessage))
 		<p style="color: red">{{$returnMessage}}</p>
@@ -27,14 +27,14 @@ function togglePassword() {
     		<td>
     			<div class="form-group">
     				<label>First Name: </label>
-    				<input type="text" name="firstName" class="form-control" placeholder="Enter First Name" minlength="2" maxlength="15" required="required"/>
+    				<input type="text" name="firstName" class="form-control" placeholder="Enter First Name" minlength="2" maxlength="15" pattern="^[a-zA-Z]+$" title="Must only contain letters, no numbers or symbols, and be 2 to 15 characters" required="required"/>
     				<div class="invalid-feedback">Valid first name required.</div>
     			</div>		
     		</td>
     		<td>
     			<div class="form-group">
     				<label>Last Name: </label>
-    				<input type="text" name="lastName" class="form-control" placeholder="Enter Last Name" minlength="2" maxlength="15" required="required"/>
+    				<input type="text" name="lastName" class="form-control" placeholder="Enter Last Name" minlength="2" maxlength="15" pattern="^[a-zA-Z]+$" title="Must only contain letters, no numbers or symbols, and be 2 to 15 characters" required="required"/>
     				<div class="invalid-feedback">Valid last name required.</div>
     			</div>
     		</td>
@@ -77,7 +77,7 @@ function togglePassword() {
     		<td>
     			<div class="form-group">
     				<label>Phone Number: </label>
-    				<input type="tel" name="phoneNumber" class="form-control" placeholder="Enter Phone Number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|\([0-9]{3}\)[0-9]{3}-[0-9]{4}" title="Must meet one of the following patterns: ***-***-**** or (***)***-****" required="required"/>
+    				<input type="tel" name="phoneNumber" class="form-control" placeholder="Enter Phone Number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|\([0-9]{3}\)[0-9]{3}-[0-9]{4}|[0-9]{10}" title="Must meet one of the following patterns: ***-***-**** or (***)***-****" required="required"/>
     				<div class="invalid-feedback">Valid phone number required.</div>
     			</div>			
     		</td>

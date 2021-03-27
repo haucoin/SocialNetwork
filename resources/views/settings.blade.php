@@ -35,7 +35,7 @@ function togglePassword() {
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="firstName">First Name</label>
 						<div class="col-md-12">
-							<input id="firstName" name="firstName" type="text" value="{{session()->get('currentUser')->getFirstName()}}" placeholder="First Name" class="form-control input-md" required="required">
+							<input id="firstName" name="firstName" type="text" value="{{session()->get('currentUser')->getFirstName()}}" placeholder="First Name" class="form-control input-md" pattern="^[a-zA-Z]+$" title="Must only contain letters, no numbers or symbols, and be 2 to 15 characters" required="required">
 							<div class="invalid-feedback">Valid first name required.</div>
 						</div>
 					</div>
@@ -45,7 +45,7 @@ function togglePassword() {
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="lastName">Last Name</label>
 						<div class="col-md-12">
-							<input id="lastName" name="lastName" type="text" value="{{session()->get('currentUser')->getLastName()}}" placeholder="Last Name" class="form-control input-md" required="required">
+							<input id="lastName" name="lastName" type="text" value="{{session()->get('currentUser')->getLastName()}}" placeholder="Last Name" class="form-control input-md" pattern="^[a-zA-Z]+$" title="Must only contain letters, no numbers or symbols, and be 2 to 15 characters" required="required">
 							<div class="invalid-feedback">Valid last name required.</div>
 						</div>
 					</div>
@@ -94,7 +94,7 @@ function togglePassword() {
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="phoneNumber">Phone Number </label>
 						<div class="col-md-12">
-							<input id="phoneNumber" name="phoneNumber" type="text" value="{{session()->get('currentUser')->getPhoneNumber()}}" placeholder="Phone number" class="form-control input-md" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|\([0-9]{3}\)[0-9]{3}-[0-9]{4}" title="Must meet one of the following patterns: ***-***-**** or (***)***-****" required="required">
+							<input id="phoneNumber" name="phoneNumber" type="text" value="{{session()->get('currentUser')->getPhoneNumber()}}" placeholder="Phone number" class="form-control input-md" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|\([0-9]{3}\)[0-9]{3}-[0-9]{4}|[0-9]{10}" title="Must meet one of the following patterns: ***-***-**** or (***)***-****" required="required">
 							<div class="invalid-feedback">Valid phone number required.</div>						
 						</div>
 					</div>

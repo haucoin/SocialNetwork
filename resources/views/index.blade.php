@@ -2,12 +2,12 @@
 @section('title', 'Social Network: Index')
 @section('content')
 
-<div align="center" style="padding-top: 25px">
+<div align="center" style="padding-top: 80px">
     <h2>Welcome to Social Network,</h2>
     <br/>
-    <h6>where you can build your profile, search for <br/>jobs, and get connected.</h6>
+    <h6>where you can build your profile, search for <br/>jobs, and get connected through groups.</h6>
     
-    <br/><br/>
+    <br/><br/><br />
     Please select Login or Register to continue:
     <br/><br/>
     <div align="center">

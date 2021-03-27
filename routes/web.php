@@ -44,6 +44,9 @@ Route::get('/registration', function () { return view('registration'); });
 // Call the registerUser method within the UserController using the /registerUser route
 Route::post('/registerUser', 'UserController@registerUser');
 
+// Route to the confirmation page using the /confirmation route
+Route::get('/confirmation', function () { return view('confirmation'); });
+
 // Call the updateUser method within the UserController using the /updateUser route
 Route::post('/updateUser', 'UserController@updateUser');
 

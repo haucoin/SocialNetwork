@@ -97,14 +97,14 @@ class PostBusinessService implements BusinessServiceInterface {
 	
 	/*
 	*
-	* @param $sortBy - String: which column button was clicked
-	* @param $jobPostings - Array<Posting>: the list of job postings
-	* @return $jobPostings - Array<Posting>: sorted list of job postings
+	* @param $sortBy - String: The string representing which column button was clicked to be sorted by
+	* @param $jobPostings - Array<Posting>: The list of job postings
+	* @return $jobPostings - Array<Posting>: The sorted list of job postings
 	*/
 	public function sort($sortBy, $jobPostings){
 		
 		/*
-		* Based of the $sortBy string this method will sort the list of job postings.
+		* Based off the $sortBy string this method will sort the list of job postings.
 		*
 		* If $sortBy is id, the list is sorted by the id number
 		* Else if $sortBy is companyName, the list is sorted by the companyNames
@@ -114,11 +114,14 @@ class PostBusinessService implements BusinessServiceInterface {
 		*/
 		if($sortBy == "id"){
 			usort($jobPostings, function($a, $b) {return strcmp($a->getId(), $b->getId());});
-		}else if($sortBy == "companyName"){
+		}
+		else if($sortBy == "companyName"){
 			usort($jobPostings, function($a, $b) {return strcmp($a->getCompanyName(), $b->getCompanyName());});
-		}else if($sortBy == "jobTitle"){
+		}
+		else if($sortBy == "jobTitle"){
 			usort($jobPostings, function($a, $b) {return strcmp($a->getJobTitle(), $b->getJobTitle());});
-		}else if($sortBy == "location"){
+		}
+		else if($sortBy == "location"){
 			usort($jobPostings, function($a, $b) {return strcmp($a->getLocation(), $b->getLocation());});
 		}
 		

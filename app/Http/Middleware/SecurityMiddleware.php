@@ -32,7 +32,7 @@ class SecurityMiddleware {
     	
     	// Check if the user is on the index, login, or registration pages or performing one of those action, set security to false
     	if($request->is('/') || $request->is('login') || $request->is('loginUser') || $request->is('registration') || $request->is('registerUser') 
-    			|| $request->is('errorPage') || $request->is('profilerest/*') || $request->is('postingrest') || $request->is('postingrest/*')) {
+    			|| $request->is('error') || $request->is('profilerest/*') || $request->is('postingrest') || $request->is('postingrest/*')) {
     		$secureCheck = false;
     	}
     	// Check if the session is set, set security to false

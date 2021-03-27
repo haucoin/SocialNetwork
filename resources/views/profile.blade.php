@@ -124,7 +124,9 @@
 							<td>
 								<p id="school" name="school" style="color: grey"><b style="color: black">School:  </b>{{$education->getSchool()}}</p>
 								<p id="degree" name="degree" style="color: grey"><b style="color: black">Degree:  </b>{{$education->getDegree()}}</p>
+								@if($education->getFieldOfStudy() != null || $education->getFieldOfStudy() != "")
 								<p id="fieldOfStudy" name="fieldOfStudy" style="color: grey"><b style="color: black">Field of Study:  </b>{{$education->getFieldOfStudy()}}</p>
+								@endif
 								<p id="graduationYear" name="graduationYear" style="color: grey"><b style="color: black">Graduation Year:  </b>{{$education->getGraduationYear()}}</p>
 								<p id="gpa" name="gpa" style="color: grey"><b style="color: black">GPA:  </b>{{$education->getGpa()}}</p>
 								<br/>
@@ -150,9 +152,9 @@
 			</td>
 			<td style="width: 50%; vertical-align: top; padding-left: 15px">
 				<!-- Job History table -->
-				<table style="width: 100%; padding-left: 5px">
+				<table style="width: 100%; padding-left: 10px">
 					<tr>
-						<td style="padding-left: 10px;">
+						<td>
 							<h5>Job History</h5>
 							<br/>
 						</td>

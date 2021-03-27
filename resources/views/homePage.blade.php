@@ -117,28 +117,28 @@
 				<form method="GET" action="groups" id="groups">
 					<table style="text-align: center; width: 100%; margin-top: 20px">
 						<tr>
-							<td width="50%">
+							<td width="35%">
 								<a style="cursor: pointer; font-size: 16px" onclick="document.getElementById('groups').submit();">
-									<p>{{substr($groups[0]->getName(), 0, 50)}}</p>
+									<p>{{substr($groups[0]->getName(), 0, 20)}}</p>
 								</a>
 							</td>
-	                        <td width="50%"><p style="color: grey">{{substr($groups[0]->getDescription(), 0, 50)}}</p></td>
+	                        <td width="65%"><p style="color: grey">{{substr($groups[0]->getDescription(), 0, 35)}}...</p></td>
 	                    </tr>
 						<tr>
-							<td width="50%">
+							<td width="35%">
 								<a style="cursor: pointer; font-size: 16px" onclick="document.getElementById('groups').submit();">
-									<p>{{substr($groups[1]->getName(), 0, 50)}}</p>
+									<p>{{substr($groups[1]->getName(), 0, 20)}}</p>
 								</a>
 							</td>
-	                        <td width="50%"><p style="color: grey">{{substr($groups[1]->getDescription(), 0, 50)}}</p></td>
+	                        <td width="65%"><p style="color: grey">{{substr($groups[1]->getDescription(), 0, 35)}}...</p></td>
 	                    </tr>
 						<tr>
-							<td width="50%">
+							<td width="35%">
 								<a style="cursor: pointer; font-size: 16px" onclick="document.getElementById('groups').submit();">
-									<p>{{substr($groups[2]->getName(), 0, 50)}}</p>
+									<p>{{substr($groups[2]->getName(), 0, 20)}}</p>
 								</a>
 							</td>
-	                        <td width="50%"><p style="color: grey">{{substr($groups[2]->getDescription(), 0, 50)}}</p></td>
+	                        <td width="65%"><p style="color: grey">{{substr($groups[2]->getDescription(), 0, 35)}}...</p></td>
 	                    </tr>
 					</table>
 				</form>

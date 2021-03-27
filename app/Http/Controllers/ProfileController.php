@@ -128,10 +128,21 @@ class ProfileController extends Controller {
     	try {
     		// Get the variables within $request passed in through the form
     		$id = $request->input('profileId');
-    		$bio = $request->input('bio');
-    		$city = $request->input('city');
-    		$state = $request->input('state');
-    		$skills = $request->input('skills');
+    		$bioStart = $request->input('bio');
+    		$cityStart = $request->input('city');
+    		$stateStart = $request->input('state');
+    		$skillsStart = $request->input('skills');
+    			
+    		// Replace all ' with \' to allow for ' in SQL statements in the data layer
+    		$bioReplace = str_replace("'", "\'", $bioStart);
+    		$cityReplace = str_replace("'", "\'", $cityStart);
+    		$stateReplace = str_replace("'", "\'", $stateStart);
+    		$skillsReplace = str_replace("'", "\'", $skillsStart);
+    		// Replace all " with \" to allow for " in SQL statements in the data layer
+    		$bio = str_replace('"', '\"', $bioReplace);
+    		$city = str_replace('"', '\"', $cityReplace);
+    		$state = str_replace('"', '\"', $stateReplace);
+    		$skills = str_replace('"', '\"', $skillsReplace);
     		
     		// Create a new profile object
     		$profile = new Profile($id, $bio, $city, $state, $skills, $_SESSION['currentUser']->getId());

@@ -52,7 +52,7 @@ Application') @section('content')
 						<div class="form-group">
 							<label class="col-md-12 control-label" for="phoneNumber">Phone Number</label>
 							<div class="col-md-12">
-								<input id="phoneNumber" name="phoneNumber" type="text" value="{{session()->get('currentUser')->getPhoneNumber()}}" placeholder="Phone number" class="form-control input-md" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|\([0-9]{3}\)[0-9]{3}-[0-9]{4}" title="Must meet one of the following patterns: ***-***-**** or (***)***-****" required="required">
+								<input id="phoneNumber" name="phoneNumber" type="text" value="{{session()->get('currentUser')->getPhoneNumber()}}" placeholder="Phone number" class="form-control input-md" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}|\([0-9]{3}\)[0-9]{3}-[0-9]{4}|[0-9]{10}" title="Must meet one of the following patterns: ***-***-**** or (***)***-****" required="required">
 							    <div class="invalid-feedback">Valid phone number required.</div>
 							</div>
 						</div>

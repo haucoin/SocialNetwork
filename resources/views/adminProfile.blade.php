@@ -132,7 +132,7 @@
 		
 			<td style="width: 50%; vertical-align: top; padding-right: 15px">
 				<!-- Education History table -->
-				<table style="width: 100%; padding-right: 5px">
+				<table style="width: 100%; padding-right: 10px">
 					<tr>
 						<td>
 							<h5>Education History</h5>
@@ -168,9 +168,9 @@
 			</td>
 			<td style="width: 50%; vertical-align: top; padding-left: 15px">
 				<!-- Job History table -->
-				<table style="width: 100%; padding-left: 5px">
+				<table style="width: 100%; padding-left: 10px">
 					<tr>
-						<td style="padding-left: 10px;">
+						<td>
 							<h5>Job History</h5>
 							<br/>
 						</td>

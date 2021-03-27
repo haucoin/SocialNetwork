@@ -14,6 +14,7 @@ use App\Business\EducationBusinessService;
 use App\Business\GroupBusinessService;
 use App\Business\PostBusinessService;
 use Exception;
+use Illuminate\Support\Facades\Mail;
 
 session_start();
 
@@ -160,11 +161,26 @@ class UserController extends Controller {
     			$profile = new Profile(0, "", "", "", "", $_SESSION['currentUser']->getId());
     			$this->profileService->create($profile);
     			
+    			// Define the array for the email body
+    			$data = array('name' => $firstName, 'username' => $username);
+    			
+    			// Define the variables needed to send the email
+    			$fullName = $firstName . " " . $lastName;
+    			$emailSubject = "Social Network - Registration Confirmation!";
+    			$senderName = "Social Network Team";
+    			$senderEmail = "socialnetworkusermanagement@gmail.com";
+    			
+    			// Use the Mail class to send the email (email is the view being used, along with defined variables and those passed in through form)
+    			Mail::send('email', $data, function($message) use ($email, $fullName, $emailSubject, $senderName, $senderEmail){
+    				$message->to($email, $fullName)->subject($emailSubject);
+    				$message->from($senderEmail, $senderName);
+    			});
+    			
     			// Logging leaving method
     			$this->logger->info("======> Leaving UserController.registerUser() with a successful registration");
     			
     			// Send to the homePage view by calling viewHome method
-    			return $this->viewHome();
+    			return view('confirmation');
     		}
     		// Failed to register the user, username already exists
     		else if($result == -1) {
@@ -257,10 +273,6 @@ class UserController extends Controller {
     	try {
     		// Call viewById method in ProfileBusinessService and set to variable
     		$userProfile = $this->profileService->viewById($_SESSION['currentUser']->getId());
-//     		// Call viewAllById method in JobBusinessService and set to variable
-//     		$jobHistory = $this->jobService->viewAllById($_SESSION['currentUser']->getId());
-//     		// Call viewAllById method in EducationBusinessService and set to variable
-//     		$educationHistory = $this->educationService->viewAllById($_SESSION['currentUser']->getId());
     		// Call viewAll method in GroupBusinessService and set to variable
     		$groups = $this->groupService->viewAll();
     		// Call viewAll method in PostBusinessService and set to variable

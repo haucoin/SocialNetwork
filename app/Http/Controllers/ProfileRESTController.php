@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Business\ProfileBusinessService;
 use App\Models\DTO;
-use Illuminate\Support\Facades\Log;
+use App\Utility\LoggerInterface;
 use Exception;
 
 /**
@@ -15,7 +15,24 @@ use Exception;
  * @desc - ProfileRESTController is a controller class that acts as a REST API for profile objects
  */
 class ProfileRESTController extends Controller {
+	
+	// Define service variable to be used as ProfileBusinessService
+	private $profileService;
+	
+	// Define protected logger variable
+	protected $logger;
+	
+	
+	/**
+	 * Default constructor to initialize the Business Service object as well as the logging interface
+	 */
+	function __construct(LoggerInterface $logger) {
+		$this->profileService = new ProfileBusinessService();
+		
+		$this->logger = $logger;
+	}
     
+	
     /**
      * Method to display a profile ojbect given the user ID
      *
@@ -25,12 +42,11 @@ class ProfileRESTController extends Controller {
 	public function show($userId) {
 		
 		// Logging entering method
-		Log::info("======> Entering ProfileRESTController.show()");
+		$this->logger->info("======> Entering ProfileRESTController.show()");
 		
     	try {
-    		// Initialize the Profile Business Service object, call viewById method and set to variable
-    		$profileService = new ProfileBusinessService();
-    		$profile = $profileService->viewById($userId);
+    		// Call viewById method and set to variable
+    		$profile = $this->profileService->viewById($userId);
 
     		// Check if the ID is null (to know the data that was retrieved is empty), set DTO to no data found
     		if($profile->getId() == null) {
@@ -45,7 +61,7 @@ class ProfileRESTController extends Controller {
     		$json = json_encode($dto);
 
     		// Logging leaving method and return json object
-    		Log::info("======> Leaving ProfileRESTController.show()");
+    		$this->logger->info("======> Leaving ProfileRESTController.show()");
     		return $json;
     	}
     	// An error occurred
@@ -57,7 +73,7 @@ class ProfileRESTController extends Controller {
     		$json = json_encode($dto);
 
     		// Logging with an error  and return json object
-    		Log::error("*** Error: ProfileRESTController.show() ", array("message" => $e->getMessage()));
+    		$this->logger->error("*** Error: ProfileRESTController.show() ", array("message" => $e->getMessage()));
     		return $json;
     	}
     }

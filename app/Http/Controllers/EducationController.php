@@ -50,11 +50,18 @@ class EducationController extends Controller {
     	
     	try {
     		// Get the variables within $request passed in through the form
-    		$school = $request->input('school');
+    		$schoolStart = $request->input('school');
     		$degree = $request->input('degree');
-    		$fieldOfStudy = $request->input('fieldOfStudy');
+    		$fieldOfStudyStart = $request->input('fieldOfStudy');
     		$graduationYear = $request->input('graduationYear');
     		$gpa = $request->input('gpa');
+    		
+    		// Replace all ' with \' to allow for ' in SQL statements in the data layer
+    		$schoolReplace = str_replace("'", "\'", $schoolStart);
+    		$fieldOfStudyReplace = str_replace("'", "\'", $fieldOfStudyStart);
+    		// Replace all " with \" to allow for " in SQL statements in the data layer
+    		$school = str_replace('"', '\"', $schoolReplace);
+    		$fieldOfStudy = str_replace('"', '\"', $fieldOfStudyReplace);	
     		
     		// Create an education object using the variables
     		$education = new Education(0, $school, $degree, $fieldOfStudy, $graduationYear, $gpa, $_SESSION['currentUser']->getId());

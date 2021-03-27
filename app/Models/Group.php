@@ -57,7 +57,7 @@ class Group {
     }
 
     public function setDescription($description) {
-        $this->owner = $description;
+        $this->description = $description;
     }
     
 }

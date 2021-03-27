@@ -16,7 +16,7 @@ function togglePassword() {
 </script>
 
 
-<div align="center" style="padding-top: 25px">
+<div align="center" style="padding-top: 100px">
     <h2>Login</h2>
     @if(isset($returnMessage))
    		<p style="color: red">{{$returnMessage}}</p>

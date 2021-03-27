@@ -112,16 +112,25 @@ class PostController extends Controller {
     	// Logging entering method
     	$this->logger->info("======> Entering PostController.createPost()");
     	
-    	try {
+    	try {    		
     		// Get the variables within $request passed in through the form
-    		$company = $request->input('companyName');
-    		$title = $request->input('jobTitle');
-    		$description = $request->input('jobDescription');
-    		$salary = $request->input('salary');
-    		$location = $request->input('location');
+    		$salary =  $request->input('salary');
+    		$location =  $request->input('location');
+    		$companyNameStart =  $request->input('companyName');
+    		$jobTitleStart =  $request->input('jobTitle');
+    		$jobDescriptionStart =  $request->input('jobDescription');
+    		
+    		// Replace all ' with \' to allow for ' in SQL statements in the data layer
+    		$companyNameReplace = str_replace("'", "\'", $companyNameStart);
+    		$jobTitleReplace = str_replace("'", "\'", $jobTitleStart);
+    		$jobDescriptionReplace = str_replace("'", "\'", $jobDescriptionStart);
+    		// Replace all " with \" to allow for " in SQL statements in the data layer
+    		$companyName = str_replace('"', '\"', $companyNameReplace);
+    		$jobTitle = str_replace('"', '\"', $jobTitleReplace);
+    		$jobDescription = str_replace('"', '\"', $jobDescriptionReplace);    	
     		
     		// Create a new Posting object using the variables
-    		$posting = new Posting(0, $company, $title, $description, $salary, $location);
+    		$posting = new Posting(0, $companyName, $jobTitle, $jobDescription, $salary, $location);
     		
     		// Call create method in PostBusinessService
     		$this->postService->create($posting);
@@ -189,11 +198,20 @@ class PostController extends Controller {
     	try {
     		// Get the variables within $request passed in through the form
     		$id = $request->input('postId');
-    		$companyName =  $request->input('companyName');
-    		$jobTitle=  $request->input('jobTitle');
-    		$jobDescription =  $request->input('jobDescription');
     		$salary =  $request->input('salary');
     		$location =  $request->input('location');
+    		$companyNameStart =  $request->input('companyName');
+    		$jobTitleStart =  $request->input('jobTitle');
+    		$jobDescriptionStart =  $request->input('jobDescription');
+    		
+    		// Replace all ' with \' to allow for ' in SQL statements in the data layer
+    		$companyNameReplace = str_replace("'", "\'", $companyNameStart);
+    		$jobTitleReplace = str_replace("'", "\'", $jobTitleStart);
+    		$jobDescriptionReplace = str_replace("'", "\'", $jobDescriptionStart);
+    		// Replace all " with \" to allow for " in SQL statements in the data layer
+    		$companyName = str_replace('"', '\"', $companyNameReplace);
+    		$jobTitle = str_replace('"', '\"', $jobTitleReplace);
+    		$jobDescription = str_replace('"', '\"', $jobDescriptionReplace);    		
     		
     		// Call viewById method in PostBusinessService and set to variable
     		$post = $this->postService->viewById($id);
@@ -272,7 +290,11 @@ class PostController extends Controller {
     	
     	try {
     		// Get the variable within $request passed in through the form
-    		$searchParam = $request->input('searchParam');
+    		$searchParamStart = $request->input('searchParam');
+    		
+    		// Replace ' and " within the search parameter for the SQL statement in the data layer
+    		$searchParamReplace = str_replace("'", "\'", $searchParamStart);
+    		$searchParam = str_replace('"', '\"', $searchParamReplace);
     		
     		// Call search method in PostBusinessService and set to variable
     		$posts = $this->postService->search($searchParam);

@@ -2,6 +2,17 @@
 @section('title', 'Social Network: Education')
 @section('content')
 
+<script>
+function toggleFieldOfStudy() {
+  var x = document.getElementById("degree");
+  if (x.value === "GED") {
+    document.getElementById("fieldOfStudy").disabled = true;
+  } else {
+      document.getElementById("fieldOfStudy").disabled = false;
+  }
+}
+</script>
+
 <div
 	style="font-size: 13px; background: #fff; padding: 20px 25px; margin: 30px 0; border-radius: 3px; box-shadow: 0 1px 1px rgba(0, 0, 0, .05); width: 70%">
 	<div
@@ -32,7 +43,7 @@
 					<div class="form-group">
 						<label class="col-md-12 control-label" for="lastName">Degree</label>
 						<div class="col-md-12">
-							<select id="degree" name="degree" class="form-control" required style="color: grey">
+							<select id="degree" name="degree" class="form-control" style="color: grey" required="required" onchange="toggleFieldOfStudy()">
 									<option value="">Select a Degree</option>
 									<option value="GED">GED</option>
 									<option value="Associate">Associate</option>
