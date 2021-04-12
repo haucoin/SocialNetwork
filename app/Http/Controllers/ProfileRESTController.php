@@ -9,7 +9,7 @@ use Exception;
 
 /**
  * @name Social Network
- * @version 6.0
+ * @version 7.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - ProfileRESTController is a controller class that acts as a REST API for profile objects

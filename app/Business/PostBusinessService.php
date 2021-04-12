@@ -6,7 +6,7 @@ use App\Data\PostingDataService;
 
 /**
  * @name Social Network
- * @version 6.0
+ * @version 7.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - PostBusinessService is a class that performs all business logic on the job posting data being sent and retrieved from the database

@@ -5,7 +5,7 @@ use JsonSerializable;
 
 /**
  * @name Social Network
- * @version 6.0
+ * @version 7.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - DTO is a model class used to hold the code status, message, and data being passed in any HTTP calls within the REST APIs

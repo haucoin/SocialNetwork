@@ -11,6 +11,7 @@
 	
 	<div style="padding: 20">
 		<img src="resources/confirmation.png" alt="Confirmed" width="120px" />
+<!-- 		<img src="https://cst256-socialnetwork.scm.azurewebsites.net/api/vfs/site/wwwroot/SocialNetwork/resources/confirmation.png" alt="Confirmed" width="120px" /> -->
 		<br/>
 		<br/>
 		<h4>Thank you!</h4>

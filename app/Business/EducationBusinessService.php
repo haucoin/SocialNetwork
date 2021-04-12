@@ -6,7 +6,7 @@ use App\Data\EducationDataService;
 
 /**
  * @name Social Network
- * @version 6.0
+ * @version 7.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - EducationBusinessService is a class that performs all business logic on the education history data of users being sent and retrieved from the database

@@ -15,7 +15,7 @@ session_start();
 
 /**
  * @name Social Network
- * @version 6.0
+ * @version 7.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - ProfileController is a controller class that handles the events and page navigation of the profile for a user

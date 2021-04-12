@@ -2,7 +2,7 @@
 
 /**
  * @name Social Network
- * @version 6.0
+ * @version 7.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - Web.app is a file that outlines the necessary routes for the application

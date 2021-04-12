@@ -4,7 +4,7 @@ namespace App\Utility;
 
 /**
  * @name Social Network
- * @version 6.0
+ * @version 7.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - LoggerInterface is an interface for the logger class to implement

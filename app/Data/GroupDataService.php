@@ -7,7 +7,7 @@ use Exception;
 
 /**
  * @name Social Network
- * @version 6.0
+ * @version 7.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - GroupDataService is a DAO that is used to access the groups and group members table within the database

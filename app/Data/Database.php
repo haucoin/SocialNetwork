@@ -4,7 +4,7 @@ namespace App\Data;
 
 /**
  * @name Social Network
- * @version 6.0
+ * @version 7.0
  * @author Holland Aucoin and Salvatore Parascandola
  *
  * @desc - Database is a class used to make a connection the the MySQL database within phpMyAdmin

@@ -11,6 +11,8 @@
 	
 	<div style="padding: 20">
 		<img src="resources/ErrorImage.png" alt="Error" width="120px" />
+		<!-- <img src="https://cst256-socialnetwork.scm.azurewebsites.net/api/vfs/site/wwwroot/SocialNetwork/resources/ErrorImage.png" alt="Error" width="120px" />  -->
+		
 		<br/>
 		<br/>
 		<h4>Oops! An error occurred.</h4>

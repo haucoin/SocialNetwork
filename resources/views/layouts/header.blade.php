@@ -1,6 +1,7 @@
 @if(session()->has('currentUser'))
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    	<a class="navbar-brand" href="home"><img src="resources/logo.png" alt="logo" width="220px" style="padding: 8px" /></a>
+	    <a class="navbar-brand" href="home"><img src="resources/logo.png" alt="logo" width="220px" style="padding: 8px" /></a>-->
+	    <!--<a class="navbar-brand" href="home"><img src="https://cst256-socialnetwork.scm.azurewebsites.net/api/vfs/site/wwwroot/SocialNetwork/resources/logo.png" alt="logo" width="220px" style="padding: 8px"/></a> -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         	<span class="navbar-toggler-icon"></span>
         </button>
@@ -32,6 +33,7 @@
 @else
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark justify-content-between">
 		<a class="navbar-brand" href="/SocialNetwork"><img src="resources/logo.png" alt="logo" width="220px" style="padding: 8px"/></a>
+		<!--<a class="navbar-brand" href="/"><img src="https://cst256-socialnetwork.scm.azurewebsites.net/api/vfs/site/wwwroot/SocialNetwork/resources/logo.png" alt="logo" width="220px" style="padding: 8px"/></a> -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
         	<span class="navbar-toggler-icon"></span>
       	</button>
